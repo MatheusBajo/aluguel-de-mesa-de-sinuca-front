@@ -1,13 +1,14 @@
-// src/components/calculators/ROICalculator.tsx
+/ src/components/calculators/ROICalculator.tsx
+// CORREÇÃO: Remover chartData não usado (linha 46)
 'use client';
 
-import {useState} from 'react';
-import {AlertCircle, ArrowRight, Calculator, TrendingUp} from 'lucide-react';
-import {Card} from '@/components/ui/card';
-import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {formatCurrency} from '@/lib/utils';
-import {WhatsAppButton} from '@/components/ui/WhatsAppButton';
-import {AnimatePresence, motion} from 'framer-motion';
+import { useState } from 'react';
+import { Calculator, TrendingUp, AlertCircle, ArrowRight } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { formatCurrency } from '@/lib/utils';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ROICalculatorProps {
     onClose?: () => void;
@@ -42,15 +43,7 @@ export function ROICalculator({ onClose }: ROICalculatorProps) {
     const savings = buyingCosts.total - rentalCosts.totalWithDelivery;
     const savingsPercentage = Math.round((savings / buyingCosts.total) * 100);
 
-    // Dados para o gráfico
-    const chartData = Array.from({ length: 24 }, (_, i) => {
-        const month = i + 1;
-        return {
-            month,
-            buy: buyingCosts.table + buyingCosts.delivery + buyingCosts.accessories + (month * (200 / 12)),
-            rent: monthlyRent * month + rentalCosts.delivery
-        };
-    });
+    // REMOVIDO: chartData que não estava sendo usado
 
     return (
         <div className="p-6">

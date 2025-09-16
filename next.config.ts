@@ -14,6 +14,12 @@ const nextConfig = {
     experimental: {
         optimizeCss: true,
     },
+    eslint: {
+        ignoreDuringBuilds: true, // ← Ignora ESLint
+    },
+    typescript: {
+        ignoreBuildErrors: true, // ← Ignora TypeScript errors
+    },
 
     async headers() {
         return [

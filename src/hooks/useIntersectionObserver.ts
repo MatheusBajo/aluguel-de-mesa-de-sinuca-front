@@ -1,4 +1,5 @@
 // src/hooks/useIntersectionObserver.ts
+// CORREÇÃO: Tipar corretamente o elementRef
 import { useEffect, useRef, useState } from 'react';
 
 interface UseIntersectionObserverProps {
@@ -16,7 +17,7 @@ export function useIntersectionObserver({
                                         }: UseIntersectionObserverProps = {}) {
     const [entry, setEntry] = useState<IntersectionObserverEntry>();
     const [isVisible, setIsVisible] = useState(false);
-    const elementRef = useRef<Element>();
+    const elementRef = useRef<HTMLDivElement>(null); // ← CORREÇÃO: HTMLDivElement ao invés de Element
     const frozen = useRef(false);
 
     const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
