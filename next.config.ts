@@ -11,9 +11,9 @@ const nextConfig = {
     reactStrictMode: true,
     // swcMinify: true, ← REMOVA ESTA LINHA
 
-    experimental: {
-        optimizeCss: true,
-    },
+    // experimental: {
+    //     optimizeCss: true,
+    // },
     eslint: {
         ignoreDuringBuilds: true, // ← Ignora ESLint
     },
