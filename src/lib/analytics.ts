@@ -1,25 +1,31 @@
 // src/lib/analytics.ts
-// Configuração do Google Analytics e conversões
-
+// CORREÇÃO: Tipar corretamente ao invés de any
 declare global {
     interface Window {
-        gtag: (...args: any[]) => void;
-        dataLayer: any[];
+        gtag: (
+            command: string,
+            targetId: string,
+            config?: {
+                page_path?: string;
+                event_category?: string;
+                event_label?: string;
+                value?: number;
+            }
+        ) => void;
+        dataLayer: Array<Record<string, unknown>>;
     }
 }
 
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-// Track page views
 export const pageview = (url: string) => {
     if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('config', GA_TRACKING_ID, {
+        window.gtag('config', GA_TRACKING_ID as string, {
             page_path: url,
         });
     }
 };
 
-// Track events
 export const event = ({ action, category, label, value }: {
     action: string;
     category: string;
@@ -35,7 +41,6 @@ export const event = ({ action, category, label, value }: {
     }
 };
 
-// Track WhatsApp conversions
 export const trackWhatsAppClick = (type: 'pf' | 'pj', location?: string) => {
     event({
         action: 'whatsapp_click',
@@ -44,7 +49,6 @@ export const trackWhatsAppClick = (type: 'pf' | 'pj', location?: string) => {
     });
 };
 
-// Track calculator usage
 export const trackCalculatorUse = (savings: number) => {
     event({
         action: 'calculator_complete',

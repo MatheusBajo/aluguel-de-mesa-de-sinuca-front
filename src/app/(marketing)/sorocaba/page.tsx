@@ -1,15 +1,14 @@
 // src/app/(marketing)/sorocaba/page.tsx
-import { Metadata } from 'next';
-import { Hero } from '@/components/sections/Hero';
-import { HowItWorks } from '@/components/sections/HowItWorks';
-import { Benefits } from '@/components/sections/Benefits';
-import { Products } from '@/components/sections/Products';
-import { Testimonials } from '@/components/sections/Testimonials';
-import { FAQ } from '@/components/sections/FAQ';
-import { CTA } from '@/components/sections/CTA';
-import { MapPin, Users, Award } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import {Metadata} from 'next';
+import {HowItWorks} from '@/components/sections/HowItWorks';
+import {Benefits} from '@/components/sections/Benefits';
+import {Products} from '@/components/sections/Products';
+import {Testimonials} from '@/components/sections/Testimonials';
+import {FAQ} from '@/components/sections/FAQ';
+import {CTA} from '@/components/sections/CTA';
+import {Award, MapPin, Users} from 'lucide-react';
+import {Card} from '@/components/ui/card';
+import {WhatsAppButton} from '@/components/ui/WhatsAppButton';
 
 export const metadata: Metadata = {
     title: 'Aluguel Mesa de Sinuca Sorocaba | Locação Mensal | R$ 250/mês',

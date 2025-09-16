@@ -1,17 +1,11 @@
 // src/components/sections/FAQ.tsx
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { HelpCircle, ChevronDown } from 'lucide-react';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import {motion} from 'framer-motion';
+import {HelpCircle} from 'lucide-react';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from '@/components/ui/accordion';
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
+import {WhatsAppButton} from '@/components/ui/WhatsAppButton';
 import {Card} from "@/components/ui/card";
 
 export function FAQ() {

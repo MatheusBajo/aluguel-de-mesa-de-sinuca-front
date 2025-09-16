@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image'; // ADICIONE ESTE IMPORT NO TOPO
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Maximize2, Users, Home } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -296,7 +297,13 @@ export function Products() {
                     <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                         <div className="p-6">
                             <h2 className="text-2xl font-bold mb-4">{currentProduct.name} - Especificações Completas</h2>
-                            <img src={currentProduct.image} alt={currentProduct.name} className="w-full rounded-lg mb-6" />
+                            <Image
+                                src={currentProduct.image}
+                                alt={currentProduct.name}
+                                width={800}
+                                height={400}
+                                className="w-full rounded-lg mb-6"
+                            />
                             <div className="space-y-4">
                                 <div>
                                     <h3 className="font-bold mb-2">Dimensões e Características</h3>

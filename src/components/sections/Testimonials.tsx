@@ -108,7 +108,7 @@ export function Testimonials() {
                                 className="p-8 md:p-12"
                             >
                                 {/* Quote Icon */}
-                                <div className="text-6xl text-primary-100 mb-4">"</div>
+                                <div className="text-6xl text-primary-100 mb-4">&ldquo;</div>
 
                                 {/* Content */}
                                 <p className="text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">

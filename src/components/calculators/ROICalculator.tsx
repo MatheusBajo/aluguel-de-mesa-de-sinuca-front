@@ -1,13 +1,13 @@
 // src/components/calculators/ROICalculator.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Calculator, TrendingUp, AlertCircle, ArrowRight } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { formatCurrency } from '@/lib/utils';
-import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
-import { motion, AnimatePresence } from 'framer-motion';
+import {useState} from 'react';
+import {AlertCircle, ArrowRight, Calculator, TrendingUp} from 'lucide-react';
+import {Card} from '@/components/ui/card';
+import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs';
+import {formatCurrency} from '@/lib/utils';
+import {WhatsAppButton} from '@/components/ui/WhatsAppButton';
+import {AnimatePresence, motion} from 'framer-motion';
 
 interface ROICalculatorProps {
     onClose?: () => void;
