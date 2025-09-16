@@ -1,4 +1,4 @@
-/ src/components/calculators/ROICalculator.tsx
+// src/components/calculators/ROICalculator.tsx
 // CORREÇÃO: Remover chartData não usado (linha 46)
 'use client';
 
