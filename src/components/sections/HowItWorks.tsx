@@ -1,3 +1,4 @@
+// src/components/sections/HowItWorks.tsx
 'use client';
 
 import { motion } from 'framer-motion';
@@ -8,34 +9,34 @@ export function HowItWorks() {
     const steps = [
         {
             number: '01',
-            title: 'Escolha e Contrate',
-            description: 'Selecione o modelo ideal e fale conosco pelo WhatsApp. Aprovação instantânea, sem burocracia.',
+            title: 'Fale Conosco',
+            description: 'WhatsApp ou telefone. Explicamos tudo sem pressa.',
             icon: <Phone className="w-8 h-8" />,
             color: 'from-blue-500 to-blue-600',
-            details: ['Sem consulta SPC/Serasa', 'Contrato digital', 'Pagamento PIX ou cartão']
+            details: ['Contrato simples', 'Pagamento mensal', 'Tire todas as dúvidas']
         },
         {
             number: '02',
-            title: 'Entrega Expressa',
-            description: 'Agendamos a entrega em até 24h. Nossa equipe monta tudo no local escolhido.',
+            title: 'Entrega e Montagem',
+            description: 'Agendamos no melhor dia pra você. Montamos tudo.',
             icon: <Truck className="w-8 h-8" />,
             color: 'from-green-500 to-green-600',
-            details: ['Montagem profissional', 'Teste de nivelamento', 'Kit de acessórios incluso']
+            details: ['Montagem profissional', 'Mesa nivelada', 'Kit completo']
         },
         {
             number: '03',
-            title: 'Aproveite!',
-            description: 'Mesa pronta para uso imediato. Suporte técnico sempre que precisar.',
+            title: 'Aproveite',
+            description: 'Pronto! Mesa funcionando. Suporte quando precisar.',
             icon: <Gamepad2 className="w-8 h-8" />,
             color: 'from-purple-500 to-purple-600',
-            details: ['Manutenção preventiva', 'Suporte via WhatsApp', 'Garantia total']
+            details: ['Manutenção inclusa', 'WhatsApp direto', 'Cancele quando quiser']
         }
     ];
 
     return (
         <section id="como-funciona" className="py-20 bg-gray-50">
             <div className="container mx-auto px-4">
-                {/* Header */}
+                {/* Header simplificado */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -43,11 +44,10 @@ export function HowItWorks() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Simples em <span className="text-primary-600">3 Passos</span>
+                        Simples assim
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Do contato à primeira partida em menos de 48 horas.
-                        Sem complicação, sem surpresas.
+                        Sem burocracia. Sem complicação.
                     </p>
                 </motion.div>
 
@@ -62,7 +62,7 @@ export function HowItWorks() {
                             transition={{ delay: index * 0.2 }}
                             className="relative"
                         >
-                            {/* Connector line (escondido no mobile e no último item) */}
+                            {/* Connector line */}
                             {index < steps.length - 1 && (
                                 <div className="hidden md:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-gray-300 to-transparent z-0" />
                             )}
@@ -104,7 +104,7 @@ export function HowItWorks() {
                     className="text-center"
                 >
                     <WhatsAppButton variant="hero" type="pf">
-                        Começar Agora - É Rápido!
+                        Começar Agora
                     </WhatsAppButton>
                 </motion.div>
             </div>

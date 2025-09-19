@@ -15,55 +15,55 @@ export function Testimonials() {
             id: '1',
             name: 'Carlos Eduardo',
             role: 'Morador Vila Mariana',
-            content: 'Melhor decisão que tomei! A mesa chegou no dia seguinte, montaram tudo em 30 minutos. Meus amigos adoram vir jogar aqui em casa. E o melhor: sem aquele investimento pesado de comprar.',
+            content: 'Melhor decisão! Dividi com 3 amigos, fica R$ 62 cada. Mesa chegou rápido, montaram tudo certinho. Toda sexta a galera vem aqui pra casa jogar.',
             rating: 5,
             location: 'São Paulo - SP',
             type: 'pf' as const,
-            highlight: 'Entrega no dia seguinte',
+            highlight: 'Dividindo com amigos',
             months: '8 meses alugando'
         },
         {
             id: '2',
             name: 'Patricia Santos',
             role: 'Síndica Condomínio Jardins',
-            content: 'Transformou nossa área de lazer! Os moradores usam todos os dias. A manutenção mensal que eles fazem mantém a mesa sempre nova. Vale cada centavo.',
+            content: 'Transformou nossa área de lazer! Os moradores usam todos os dias. A manutenção que eles fazem mantém a mesa sempre em ordem. Vale cada centavo.',
             rating: 5,
             location: 'São Paulo - SP',
             type: 'pj' as const,
-            highlight: 'Manutenção impecável',
+            highlight: 'Manutenção inclusa',
             months: '1 ano e 3 meses'
         },
         {
             id: '3',
             name: 'Roberto Lima',
             role: 'Empresário',
-            content: 'Instalei na área de descompressão da empresa. A produtividade aumentou, o clima melhorou. E quando precisamos trocar de mesa por uma maior, foi super rápido.',
+            content: 'Instalei na área de descompressão da empresa. O pessoal adora, melhorou o clima. Quando precisamos trocar por uma maior, foi super tranquilo.',
             rating: 5,
             location: 'Sorocaba - SP',
             type: 'pj' as const,
-            highlight: 'Trocaram a mesa quando pedi',
+            highlight: 'Flexibilidade pra trocar',
             months: '6 meses alugando'
         },
         {
             id: '4',
             name: 'Ana Clara',
             role: 'Moradora Brooklin',
-            content: 'Meu marido sempre quis uma mesa de sinuca mas eu tinha medo do investimento. Com o aluguel, testamos e adoramos! Agora é o point da família nos finais de semana.',
+            content: 'Meu marido sempre quis uma mesa mas eu tinha medo do investimento. Com o aluguel, testamos e adoramos! Agora é o point da família nos finais de semana.',
             rating: 5,
             location: 'São Paulo - SP',
             type: 'pf' as const,
-            highlight: 'Sem risco de arrependimento',
+            highlight: 'Teste antes de comprar',
             months: '4 meses alugando'
         },
         {
             id: '5',
             name: 'Fernando Oliveira',
             role: 'Dono de Bar',
-            content: 'Alugo 3 mesas para meu bar. Muito melhor que comprar! Eles cuidam de toda manutenção, e se uma mesa dá problema, trocam no mesmo dia. Excelente!',
+            content: 'Alugo 3 mesas para meu bar. Muito melhor que comprar! Eles cuidam de toda manutenção, e se uma mesa dá problema, resolvem rápido. Excelente!',
             rating: 5,
             location: 'Grande São Paulo',
             type: 'pj' as const,
-            highlight: 'Suporte comercial perfeito',
+            highlight: 'Suporte comercial',
             months: '2 anos alugando'
         }
     ];
@@ -87,7 +87,7 @@ export function Testimonials() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        <span className="text-primary-600">+247 Clientes</span> Satisfeitos
+                        Clientes <span className="text-primary-600">Satisfeitos</span>
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                         Veja o que nossos clientes têm a dizer sobre a experiência
@@ -137,8 +137,8 @@ export function Testimonials() {
                                                     )}
                                                 </Badge>
                                                 <span className="text-xs text-gray-500">
-                          {testimonials[currentIndex].months}
-                        </span>
+                                                    {testimonials[currentIndex].months}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@ export function Testimonials() {
                             </motion.div>
                         </AnimatePresence>
 
-                        {/* Navigation */}
+                        {/* Navigation - POSIÇÃO ORIGINAL */}
                         <div className="absolute bottom-4 right-4 flex gap-2">
                             <button
                                 onClick={prevTestimonial}
@@ -176,7 +176,7 @@ export function Testimonials() {
                         </div>
                     </Card>
 
-                    {/* Dots Indicator */}
+                    {/* Dots Indicator - FORA DO CARD */}
                     <div className="flex justify-center gap-2 mt-6">
                         {testimonials.map((_, index) => (
                             <button
@@ -189,27 +189,6 @@ export function Testimonials() {
                         ))}
                     </div>
                 </div>
-
-                {/* Trust Stats */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="grid md:grid-cols-4 gap-6"
-                >
-                    {[
-                        { number: '247+', label: 'Clientes Ativos', icon: '😊' },
-                        { number: '4.9/5', label: 'Avaliação Média', icon: '⭐' },
-                        { number: '98%', label: 'Taxa de Renovação', icon: '🔄' },
-                        { number: '24h', label: 'Tempo de Entrega', icon: '⚡' }
-                    ].map((stat, index) => (
-                        <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
-                            <div className="text-3xl mb-2">{stat.icon}</div>
-                            <div className="text-3xl font-bold text-primary-600 mb-1">{stat.number}</div>
-                            <div className="text-sm text-gray-600">{stat.label}</div>
-                        </Card>
-                    ))}
-                </motion.div>
             </div>
         </section>
     );

@@ -18,13 +18,13 @@ export default function Home() {
       <>
         <Header />
         <main className="min-h-screen">
-          <Hero />
-          <HowItWorks />
-          <Benefits />
-          <Products />
-          <Testimonials />
-          <FAQ />
-          <CTA />
+            <Hero />
+            <Products />
+            <HowItWorks />
+            <Benefits />
+            <Testimonials />
+            <FAQ />
+            <CTA />
         </main>
         <Footer />
         {/* Floating WhatsApp Button */}
