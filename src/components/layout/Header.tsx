@@ -30,8 +30,8 @@ export function Header() {
 
     return (
         <header className={cn(
-            'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
-            isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+            'fixed top-02 left-0 right-0 z-40 transition-all',
+            isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg text-black' : 'bg-transparent text-white'
         )}>
             <div className="container mx-auto px-4">
                 <nav className="flex items-center justify-between h-20">
@@ -40,7 +40,7 @@ export function Header() {
                         <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
                             <span className="text-white font-bold text-xl">🎱</span>
                         </div>
-                        <span className="font-display font-bold text-xl text-gray-900">Aluguel de Bilhar</span>
+                        <span className="font-display font-bold text-xl ">Aluguel de Bilhar</span>
                     </Link>
 
                     {/* Desktop Nav */}
@@ -49,7 +49,7 @@ export function Header() {
                             <a
                                 key={item.href}
                                 href={item.href}
-                                className="text-gray-700 hover:text-primary-600 transition-colors font-medium"
+                                className="hover:text-primary-600 transition-colors !duration-75 font-medium"
                             >
                                 {item.label}
                             </a>
