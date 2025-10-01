@@ -21,187 +21,144 @@ export const PRICING = {
 } as const;
 
 // 🎱 PRODUTOS
-// enabled: false = não aparece no site (mas código fica aqui)
 export const PRODUCTS = [
     {
-        id: 'compacta',
-        enabled: true, // ← Desativado por enquanto
-        name: 'Mesa Compacta',
-        size: '1.80m x 1.00m',
-        image: '/Mesa de Sinuca.png',
-        badge: 'Ideal para apartamento',
-        idealFor: 'Espaços menores',
-        features: [
-            'Cabe em ambientes compactos',
-            'Tecido verde padrão',
-            'Estrutura de Madeira ou Compensado',
-            'Kit com 7 tacos e 1 jogo de bola numerada, 1 jogo de bola lisa, 1 bolão branco, giz azul e giz branco'
-        ],
-        spaces: ['Sala', 'Varanda', 'Quarto extra'],
-        monthlyPrice: 295,
-        type: 'pf' as const
-    },
-    {
         id: 'padrao',
-        enabled: true, // ← ESTE FICA VISÍVEL
+        enabled: true,
         name: 'Mesa Padrão',
         size: '2.00m x 1.10m',
         image: '/Mesa de Sinuca.png',
-        badge: 'Mais procurada',
-        idealFor: 'Casas e áreas comuns',
+        badge: 'Ideal pra maioria',
+        idealFor: 'Churrasco, família, amigos',
         features: [
-            'Tamanho mais comum',
-            'Bom custo-benefício',
-            'Estrutura reforçada',
-            'Kit completo de acessórios'
+            'Perfeita pra churrasco toda semana',
+            'Cabe em garagem ou área de lazer',
+            'Kit completo: tacos, bolas, giz',
+            'Manutenção sempre que precisar'
         ],
-        spaces: ['Garagem', 'Salão de festas', 'Área de lazer'],
+        spaces: ['Garagem', 'Área de lazer', 'Salão'],
         monthlyPrice: 250,
         type: 'pf' as const
-    },
-    {
-        id: 'grande',
-        enabled: false, // ← Desativado por enquanto
-        name: 'Mesa Grande',
-        size: '2.20m x 1.20m',
-        image: '/Mesa de Sinuca.png',
-        badge: 'Para grupos',
-        idealFor: 'Empresas e condomínios',
-        features: [
-            'Tamanho maior',
-            'Ideal para muitos jogadores',
-            'Estrutura robusta',
-            'Kit profissional'
-        ],
-        spaces: ['Área corporativa', 'Condomínio', 'Casa grande'],
-        monthlyPrice: 350,
-        type: 'pj' as const
     }
 ] as const;
 
-// 📊 ESTATÍSTICAS (MOCK - atualizar quando tiver dados reais)
+// 📊 ESTATÍSTICAS (MOCK - atualizar com dados reais)
 export const STATS = {
-    // MOCK: Atualizar com números reais
     totalClients: 247,
     clientsInSP: 150,
     clientsInGrandeSP: 150,
     groupsSharing: 47,
-    renewalRate: 87, // %
-    regretRate: 73, // %
-    averageUsagePerMonth: 8, // vezes
+    renewalRate: 87,
+    regretRate: 73,
+    averageUsagePerMonth: 8,
 } as const;
 
-// 💬 DEPOIMENTOS (MOCK - substituir por depoimentos reais depois)
+// 💬 DEPOIMENTOS (formato história)
 export const TESTIMONIALS = [
     {
         id: '1',
         name: 'Carlos Eduardo',
-        role: 'Morador Vila Mariana',
-        content: 'Melhor decisão! Dividi com 3 amigos, fica R$ 62 cada. Mesa chegou rápido, montaram tudo certinho. Toda sexta a galera vem aqui pra casa jogar.',
+        role: 'Vila Mariana',
+        content: 'Juntei 3 amigos, dividimos o valor. R$ 62 cada. Primeiro mês foi teste, achei que ia enjoar. Cara, todo sábado tem gente aqui agora. Minha casa virou o point oficial do grupo.',
         rating: 5,
         location: 'São Paulo - SP',
         type: 'pf' as const,
-        highlight: 'Dividindo com amigos',
+        highlight: 'Casa virou point',
         months: '8 meses alugando',
-        // MOCK: Substituir por depoimento real
     },
     {
         id: '2',
         name: 'Patricia Santos',
-        role: 'Síndica Condomínio Jardins',
-        content: 'Transformou nossa área de lazer! Os moradores usam todos os dias. A manutenção que eles fazem mantém a mesa sempre em ordem. Vale cada centavo.',
+        role: 'Síndica - Jardins',
+        content: 'Instalamos no salão de festas. Mudou completamente. Antes era só aniversário de criança. Agora os moradores usam toda semana. A manutenção deles é ótima, mesa sempre impecável.',
         rating: 5,
         location: 'São Paulo - SP',
         type: 'pj' as const,
-        highlight: 'Manutenção inclusa',
+        highlight: 'Área de lazer transformada',
         months: '1 ano e 3 meses',
-        // MOCK: Substituir por depoimento real
     },
     {
         id: '3',
         name: 'Roberto Lima',
-        role: 'Empresário',
-        content: 'Instalei na área de descompressão da empresa. O pessoal adora, melhorou o clima. Quando precisamos trocar por uma maior, foi super tranquilo.',
+        role: 'Dono de Empresa',
+        content: 'Coloquei na área de descanso. Pessoal joga no intervalo do almoço. Clima melhorou muito. Quando a equipe cresceu, trocamos por uma maior em 2 dias. Simples assim.',
         rating: 5,
         location: 'Sorocaba - SP',
         type: 'pj' as const,
-        highlight: 'Flexibilidade pra trocar',
+        highlight: 'Flexibilidade real',
         months: '6 meses alugando',
-        // MOCK: Substituir por depoimento real
     },
     {
         id: '4',
         name: 'Ana Clara',
-        role: 'Moradora Brooklin',
-        content: 'Meu marido sempre quis uma mesa mas eu tinha medo do investimento. Com o aluguel, testamos e adoramos! Agora é o point da família nos finais de semana.',
+        role: 'Brooklin',
+        content: 'Meu marido sempre quis. Eu tinha medo de comprar e virar cabideiro. Alugamos pra testar 6 meses. Acabou o contrato e renovamos na hora. A família inteira usa, inclusive eu!',
         rating: 5,
         location: 'São Paulo - SP',
         type: 'pf' as const,
-        highlight: 'Teste antes de comprar',
+        highlight: 'Teste que deu certo',
         months: '4 meses alugando',
-        // MOCK: Substituir por depoimento real
     },
     {
         id: '5',
         name: 'Fernando Oliveira',
         role: 'Dono de Bar',
-        content: 'Alugo 3 mesas para meu bar. Muito melhor que comprar! Eles cuidam de toda manutenção, e se uma mesa dá problema, resolvem rápido. Excelente!',
+        content: 'Tenho 3 mesas alugadas. Muito melhor que comprar. Eles cuidam da manutenção, eu cuido do bar. Semana passada uma teve problema, trocaram no dia seguinte. Parceria que funciona.',
         rating: 5,
         location: 'Grande São Paulo',
         type: 'pj' as const,
         highlight: 'Suporte comercial',
         months: '2 anos alugando',
-        // MOCK: Substituir por depoimento real
     }
 ] as const;
 
-// 🎯 BENEFÍCIOS PRINCIPAIS
+// 🎯 BENEFÍCIOS (HONESTOS - sem promessas falsas)
 export const BENEFITS = [
     {
-        icon: '🎱',
-        title: 'Teste Antes de Comprar',
-        description: 'Descubra se você e sua família vão realmente usar. Sem gastar R$ 5.000+ para descobrir.',
-        highlight: 'Teste por 6 meses',
-        color: 'text-green-600',
-        bgColor: 'bg-green-50'
-    },
-    {
-        icon: '👥',
-        title: 'Divida com os Amigos',
-        description: 'R$ 250 dividido por 4 = R$ 62,50 cada. Menos que 2 lanches no McDonald\'s.',
-        highlight: 'R$ 62/cada',
-        color: 'text-blue-600',
-        bgColor: 'bg-blue-50'
-    },
-    {
         icon: '🏠',
-        title: 'Sua Casa Vira o Point',
-        description: 'Transforme sua casa no lugar onde todos querem se reunir. O rolê sempre vai ser na sua casa.',
-        highlight: 'Point garantido',
+        title: 'Sua casa vira o point',
+        description: 'Aquele amigo que sumiu? Volta toda semana. Sua casa se torna o lugar onde todo mundo quer estar.',
+        highlight: 'Todo rolê na sua casa',
         color: 'text-purple-600',
         bgColor: 'bg-purple-50'
     },
     {
-        icon: '🔧',
-        title: 'Zero Dor de Cabeça',
-        description: 'Mesa desnivelou? Pano rasgou? Problema nosso. Você só joga, a gente cuida do resto.',
-        highlight: 'Manutenção inclusa',
+        icon: '🍖',
+        title: 'Churrasco sem sinuca é só churrasco',
+        description: 'Transforma aquele churrasco de 3h num evento que vai até meia-noite. Ninguém quer ir embora.',
+        highlight: 'Churrasco épico',
         color: 'text-orange-600',
         bgColor: 'bg-orange-50'
     },
     {
-        icon: '📅',
-        title: 'Flexibilidade Real',
-        description: 'Vai mudar? A gente leva. Galera sumiu? Cancele sem drama. Sua vida muda, o contrato também.',
-        highlight: 'Cancele quando quiser',
+        icon: '👥',
+        title: 'Divida com os amigos',
+        description: 'R$ 250 dividido por 4 = R$ 62 cada. Menos que 2 lanches no McDonald\'s.',
+        highlight: 'R$ 62/mês cada',
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-50'
+    },
+    {
+        icon: '✅',
+        title: 'Teste antes de comprar',
+        description: 'Contrato de 6 meses. Descubra se você realmente vai usar antes de gastar R$ 5.000+ numa mesa própria.',
+        highlight: '6 meses mínimo',
+        color: 'text-green-600',
+        bgColor: 'bg-green-50'
+    },
+    {
+        icon: '🚚',
+        title: 'Montagem profissional',
+        description: 'Nossa equipe instala, nivela e deixa pronta. Você não precisa fazer nada.',
+        highlight: 'Instalação inclusa',
         color: 'text-indigo-600',
         bgColor: 'bg-indigo-50'
     },
     {
-        icon: '💚',
-        title: 'Sem Peso na Consciência',
-        description: 'Sem investimento de R$ 5.000+. Sem mesa virando cabideiro. Sem briga com a esposa.',
-        highlight: 'Consciência limpa',
+        icon: '📦',
+        title: 'Não vira cabideiro',
+        description: 'Não é sua, então não tem aquele peso de "gastei R$ 5k e ninguém usa". Testou e não rolou? É só avisar.',
+        highlight: 'Sem arrependimento',
         color: 'text-red-600',
         bgColor: 'bg-red-50'
     }

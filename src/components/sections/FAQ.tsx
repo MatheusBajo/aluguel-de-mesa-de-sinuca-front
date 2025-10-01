@@ -13,69 +13,69 @@ export function FAQ() {
         pricing: [
             {
                 question: 'Como funciona a divisão entre amigos?',
-                answer: 'Super simples! O aluguel de R$ 250/mês pode ser dividido entre vocês. Com 4 amigos fica R$ 62,50 cada, com 6 amigos só R$ 42 cada. Vocês decidem entre si como organizar os pagamentos e uso. A maioria dos grupos faz um rodízio ou deixa na casa de quem tem mais espaço.'
+                answer: 'Você junta a galera e divide do jeito que quiserem. R$ 250 ÷ 4 = R$ 62,50 cada. A gente não se mete em como vocês organizam isso. Só queremos saber quem é o responsável pelo contrato.'
             },
             {
-                question: 'E se meus amigos desistirem?',
-                answer: 'Sem problema! Você pode continuar sozinho, encontrar novos amigos para dividir, ou cancelar o contrato com 30 dias de aviso. Não travamos você em contratos longos se a situação mudar.'
+                question: 'E se meus amigos desistirem no meio?',
+                answer: 'Você pode continuar sozinho, encontrar outros amigos pra dividir, ou cancelar avisando 30 dias antes. Sem multa, sem burocracia. A vida muda, a gente entende.'
             },
             {
-                question: 'Preciso pagar tudo de uma vez?',
-                answer: 'Não! Você paga mensalmente. O primeiro pagamento é feito na contratação e depois sempre 30 dias após. Sem entrada alta, sem parcelas no cartão. Pague conforme usa.'
+                question: 'Tem que pagar tudo de uma vez?',
+                answer: 'Não. Você paga por mês. Primeiro pagamento na contratação, depois mensalmente. Sem entrada alta, sem parcelamento no cartão cheio de juros.'
             },
             {
-                question: 'Tem taxa de entrega?',
-                answer: 'Sim, cobramos uma taxa única de entrega e montagem que varia conforme sua região. Mas é pago uma vez só. A retirada, quando você cancelar, também está incluída nessa taxa.'
+                question: 'Quanto custa a entrega?',
+                answer: 'Taxa única de entrega + montagem que varia por região (geralmente R$ 150-250). É pago uma vez só. Quando você cancelar, a retirada já tá inclusa nessa taxa.'
             }
         ],
         service: [
             {
-                question: 'As mesas são novas ou usadas?',
-                answer: 'Nossas mesas são profissionais revisadas e certificadas. Passam por inspeção completa antes de cada locação. Você recebe uma mesa em perfeito estado, com qualidade de jogo profissional, mas sem pagar o preço de uma nova.'
+                question: 'A mesa é nova ou usada?',
+                answer: 'Sinceridade: usada, mas revisada profissionalmente. Trocamos pano se precisar, nivelamos, certificamos. Você recebe uma mesa em perfeito estado de jogo, só não paga preço de nova.'
             },
             {
-                question: 'O que acontece se a mesa der problema?',
-                answer: 'A gente resolve! Manutenção está inclusa no aluguel. Se o pano rasgar, a mesa desnivelou ou qualquer problema técnico, nossa equipe vai até você consertar. Em casos extremos, trocamos a mesa. Você nunca fica na mão.'
+                question: 'E se a mesa der problema?',
+                answer: 'Consertamos ou trocamos. Manutenção tá inclusa no aluguel. Pano rasgou? Mesa empenou? Problema nosso. Em 2-3 dias resolvemos. Se for grave, trocamos a mesa inteira.'
             },
             {
                 question: 'Posso trocar de mesa durante o contrato?',
-                answer: 'Sim! Se você quiser um modelo maior, menor, ou diferente, conversamos sobre a troca. Queremos que você tenha a mesa ideal para seu espaço e necessidade.'
+                answer: 'Pode. Se quiser uma maior, menor, ou diferente, a gente conversa e resolve. Pode ter custo adicional dependendo do caso, mas é sempre transparente.'
             },
             {
-                question: 'Vocês ensinam a jogar?',
-                answer: 'Nossos técnicos dão dicas básicas na instalação, mas não oferecemos aulas formais. Porém, temos um grupo no WhatsApp onde clientes trocam dicas e até marcam jogos entre si!'
+                question: 'Vocês dão aulas de sinuca?',
+                answer: 'Não. Nossos técnicos dão dicas básicas na instalação (como segurar o taco, bater na bola). Pra aulas de verdade, procure um professor especializado.'
             }
         ],
         delivery: [
             {
-                question: 'Em quanto tempo vocês entregam?',
-                answer: 'Depende da sua região e disponibilidade de estoque. Normalmente entre 3 a 7 dias úteis após aprovação do contrato. Agendamos o melhor dia e horário para você receber.'
+                question: 'Demora quanto pra entregar?',
+                answer: 'Depende da região e estoque. Geralmente 3-7 dias úteis após você assinar o contrato. Sempre agendamos dia e horário que funcionem pra você.'
             },
             {
-                question: 'Como funciona a montagem?',
-                answer: 'Nossa equipe especializada faz toda a montagem. Leva cerca de 1-2 horas, dependendo do modelo. Deixamos tudo pronto, nivelado e você já pode jogar no mesmo dia.'
+                question: 'Quem monta a mesa?',
+                answer: 'Nossa equipe. Leva 1-2 horas. Deixamos tudo nivelado, pronto pra jogar no mesmo dia. Você não encosta um dedo.'
             },
             {
                 question: 'E se eu morar em apartamento?',
-                answer: 'Avaliamos o acesso antes da entrega. A mesa precisa caber no elevador ou vamos pela escada (até 3º andar geralmente). Se não for possível, devolvemos qualquer valor pago. Sem risco para você.'
+                answer: 'A gente avalia antes. Mesa precisa caber no elevador ou subir pela escada (até 3º andar normalmente). Se não der, devolvemos seu dinheiro. Sem pegadinha.'
             },
             {
-                question: 'Preciso de quanto espaço?',
-                answer: 'Ideal é ter uma área de 4m x 3m (1,5m livre de cada lado da mesa). Mas temos mesas menores para espaços reduzidos. Na visita técnica, medimos e recomendamos o melhor tamanho.'
+                question: 'Quanto espaço preciso?',
+                answer: 'Ideal: 4m x 3m (1,5m livre de cada lado pra jogar confortável). Mas a gente se adapta. Se o espaço for apertado, recomendamos a mesa menor ou te mostramos como funciona antes de instalar.'
             }
         ]
     };
 
     const categories = [
-        { id: 'pricing', label: 'Valores e Divisão' },
-        { id: 'service', label: 'Sobre o Serviço' },
+        { id: 'pricing', label: 'Dinheiro e Divisão' },
+        { id: 'service', label: 'Como Funciona' },
         { id: 'delivery', label: 'Entrega e Espaço' }
     ];
 
     return (
         <section id="faq" className="py-20 bg-gray-50">
             <div className="container mx-auto px-4">
-                {/* Header - MUDADO */}
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -83,15 +83,14 @@ export function FAQ() {
                     className="text-center mb-12"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Dúvidas? A Gente Responde
+                        Perguntas Diretas, Respostas Honestas
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Transparência total. Sem letras miúdas.
-                        Se não encontrar sua dúvida aqui, chama no WhatsApp.
+                        Zero enrolação. Se não tiver aqui, manda no WhatsApp que a gente responde na hora.
                     </p>
                 </motion.div>
 
-                {/* FAQ Tabs - MANTIDO ESTRUTURA */}
+                {/* FAQ Tabs */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -136,7 +135,7 @@ export function FAQ() {
                     </Tabs>
                 </motion.div>
 
-                {/* CTA - MUDADO */}
+                {/* CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -146,16 +145,15 @@ export function FAQ() {
                     <Card className="inline-block p-8 bg-gradient-to-r from-primary-50 to-accent-50">
                         <HelpCircle className="w-12 h-12 text-primary-600 mx-auto mb-4" />
                         <h3 className="text-xl font-bold text-gray-900 mb-2">
-                            Quer conversar sem compromisso?
+                            Ainda com dúvida?
                         </h3>
                         <p className="text-gray-600 mb-6 max-w-md">
-                            Tire todas as suas dúvidas direto no WhatsApp.
-                            Respondemos rápido e com total transparência.
+                            Chama no WhatsApp. Respondemos rápido e sem enrolação.
                         </p>
                         <WhatsAppButton
                             variant="hero"
                             type="custom"
-                            message="Oi! Vi o site e tenho algumas dúvidas sobre o aluguel de mesa de sinuca. Podem me ajudar?"
+                            message="Oi! Vi o site e tenho algumas dúvidas. Podem me ajudar?"
                         >
                             Chamar no WhatsApp
                         </WhatsAppButton>

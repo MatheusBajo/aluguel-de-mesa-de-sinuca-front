@@ -1,4 +1,4 @@
-// tailwind.config.ts - ATUALIZADO PARA TAILWIND CSS 4
+// tailwind.config.ts - CORRIGIDO
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -11,13 +11,12 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // Sistema de cores atualizado
                 primary: {
                     50: '#eff6ff',
                     100: '#dbeafe',
                     200: '#bfdbfe',
                     300: '#93c5fd',
-                    400: '#60a5fa', // Para gradientes
+                    400: '#60a5fa',
                     500: '#3b82f6',
                     600: '#2563eb',
                     700: '#1d4ed8',
@@ -29,7 +28,7 @@ const config: Config = {
                     100: '#ffedd5',
                     200: '#fed7aa',
                     300: '#fdba74',
-                    400: '#fb923c', // Para gradientes
+                    400: '#fb923c',
                     500: '#f97316',
                     600: '#ea580c',
                     700: '#c2410c',
@@ -85,8 +84,8 @@ const config: Config = {
         },
     },
     plugins: [
-        require('tailwindcss-animate'),
-        // Se usar Tailwind CSS 4, pode adicionar os novos plugins aqui
+        // Removido tailwindcss-animate (não instalado)
+        // tw-animate-css já está importado no globals.css
     ],
 }
 
