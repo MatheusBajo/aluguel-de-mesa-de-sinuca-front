@@ -8,62 +8,16 @@ import { ChevronLeft, ChevronRight, Maximize2, Users, Home } from 'lucide-react'
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { getEnabledProducts } from '@/lib/site-config';
 
 export function Products() {
+    const products = getEnabledProducts(); // ← Puxa só produtos habilitados
     const [selectedProduct, setSelectedProduct] = useState(0);
-    const [showDetails, setShowDetails] = useState(false);
 
-    const products = [
-        {
-            id: '1',
-            name: 'Mesa Compacta',
-            size: '1.80m x 1.00m',
-            image: '/Mesa de Sinuca.png',
-            badge: 'Ideal para apartamento',
-            idealFor: 'Espaços menores',
-            features: [
-                'Cabe em ambientes compactos',
-                'Tecido verde padrão',
-                'Estrutura em MDF',
-                'Kit com 2 tacos e bolas'
-            ],
-            spaces: ['Sala', 'Varanda', 'Quarto extra'],
-            monthlyPrice: 250
-        },
-        {
-            id: '2',
-            name: 'Mesa Padrão',
-            size: '2.00m x 1.10m',
-            image: '/Mesa de Sinuca.png',
-            badge: 'Mais procurada',
-            idealFor: 'Casas e áreas comuns',
-            features: [
-                'Tamanho mais comum',
-                'Bom custo-benefício',
-                'Estrutura reforçada',
-                'Kit completo de acessórios'
-            ],
-            spaces: ['Garagem', 'Salão de festas', 'Área de lazer'],
-            monthlyPrice: 250
-        },
-        {
-            id: '3',
-            name: 'Mesa Grande',
-            size: '2.20m x 1.20m',
-            image: '/Mesa de Sinuca.png',
-            badge: 'Para grupos',
-            idealFor: 'Empresas e condomínios',
-            features: [
-                'Tamanho maior',
-                'Ideal para muitos jogadores',
-                'Estrutura robusta',
-                'Kit profissional'
-            ],
-            spaces: ['Área corporativa', 'Condomínio', 'Casa grande'],
-            monthlyPrice: 350
-        }
-    ];
+    // Se não tem produtos habilitados, não renderiza nada
+    if (products.length === 0) {
+        return null;
+    }
 
     const currentProduct = products[selectedProduct];
 
@@ -78,11 +32,14 @@ export function Products() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Escolha sua <span className="text-primary-600">Mesa Ideal</span>
+                        {products.length > 1 ? 'Escolha sua ' : 'Nossa '}
+                        <span className="text-primary-600">Mesa Ideal</span>
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Temos o tamanho certo pro seu espaço.
-                        Todas em perfeito estado de uso.
+                        {products.length > 1
+                            ? 'Temos o tamanho certo pro seu espaço.'
+                            : 'Mesa profissional em perfeito estado.'
+                        } Todas revisadas e certificadas.
                     </p>
                 </motion.div>
 
@@ -104,9 +61,8 @@ export function Products() {
                                     exit={{ opacity: 0 }}
                                     className="aspect-video relative"
                                 >
-                                    {/* Imagem real 16:9 */}
                                     <Image
-                                        src="/Mesa de Sinuca.png"
+                                        src={currentProduct.image}
                                         alt={currentProduct.name}
                                         width={800}
                                         height={450}
@@ -121,34 +77,36 @@ export function Products() {
                                 </motion.div>
                             </AnimatePresence>
 
-                            {/* Navigation */}
-                            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-4">
-                                <button
-                                    onClick={() => setSelectedProduct((prev) => (prev - 1 + products.length) % products.length)}
-                                    className="w-12 h-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-lg hover:bg-white transition-all"
-                                >
-                                    <ChevronLeft className="w-6 h-6" />
-                                </button>
+                            {/* Navigation - só aparece se tiver mais de 1 produto */}
+                            {products.length > 1 && (
+                                <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-4">
+                                    <button
+                                        onClick={() => setSelectedProduct((prev) => (prev - 1 + products.length) % products.length)}
+                                        className="w-12 h-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-lg hover:bg-white transition-all"
+                                    >
+                                        <ChevronLeft className="w-6 h-6" />
+                                    </button>
 
-                                {/* Dots */}
-                                <div className="flex gap-2">
-                                    {products.map((_, i) => (
-                                        <div
-                                            key={i}
-                                            className={`h-2 rounded-full transition-all ${
-                                                i === selectedProduct ? 'w-8 bg-primary-600' : 'w-2 bg-white/60'
-                                            }`}
-                                        />
-                                    ))}
+                                    {/* Dots */}
+                                    <div className="flex gap-2">
+                                        {products.map((_, i) => (
+                                            <div
+                                                key={i}
+                                                className={`h-2 rounded-full transition-all ${
+                                                    i === selectedProduct ? 'w-8 bg-primary-600' : 'w-2 bg-white/60'
+                                                }`}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    <button
+                                        onClick={() => setSelectedProduct((prev) => (prev + 1) % products.length)}
+                                        className="w-12 h-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-lg hover:bg-white transition-all"
+                                    >
+                                        <ChevronRight className="w-6 h-6" />
+                                    </button>
                                 </div>
-
-                                <button
-                                    onClick={() => setSelectedProduct((prev) => (prev + 1) % products.length)}
-                                    className="w-12 h-12 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-lg hover:bg-white transition-all"
-                                >
-                                    <ChevronRight className="w-6 h-6" />
-                                </button>
-                            </div>
+                            )}
                         </div>
                     </motion.div>
 
@@ -168,7 +126,7 @@ export function Products() {
                                     {currentProduct.size}
                                 </span>
                                 <span className="flex items-center gap-1">
-                                    {currentProduct.monthlyPrice === 250 ?
+                                    {currentProduct.type === 'pf' ?
                                         <Home className="w-4 h-4" /> :
                                         <Users className="w-4 h-4" />
                                     }
@@ -211,7 +169,7 @@ export function Products() {
                                         R$ {currentProduct.monthlyPrice}
                                         <span className="text-lg font-normal text-gray-600">/mês</span>
                                     </p>
-                                    <p className="text-sm text-gray-500 mt-1">Contrato mínimo 6 meses</p>
+                                    <p className="text-sm text-gray-500 mt-1">Contrato mínimo 6 meses + Taxa de Entrega</p>
                                 </div>
                             </div>
                         </Card>

@@ -4,11 +4,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle, Users, Shield } from 'lucide-react';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { STATS } from '@/lib/site-config';
 
 export function CTA() {
     return (
         <section className="py-20 bg-gradient-to-br from-primary-600 to-accent-600 relative overflow-hidden">
-            {/* Background pattern - MANTIDO */}
+            {/* Background pattern */}
             <div className="absolute inset-0 bg-black/10" />
             <div className="absolute inset-0">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
@@ -22,24 +23,27 @@ export function CTA() {
                     viewport={{ once: true }}
                     className="max-w-4xl mx-auto text-center text-white"
                 >
-                    {/* Badge - MUDADO */}
+                    {/* Badge - MOCK */}
                     <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full mb-8">
                         <Users className="w-5 h-5 text-yellow-300" />
-                        <span className="font-semibold">47 grupos já dividindo em SP</span>
+                        <span className="font-semibold">
+                            {STATS.groupsSharing} grupos já dividindo em SP
+                        </span>
+                        {/* MOCK: Atualizar número real */}
                     </div>
 
-                    {/* Headline - MUDADO */}
+                    {/* Headline */}
                     <h2 className="text-4xl lg:text-6xl font-bold mb-6">
                         Pronto para Reunir a Galera?
                     </h2>
 
-                    {/* Subheadline - MUDADO */}
+                    {/* Subheadline */}
                     <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
                         Monte seu grupo, divida o valor e transforme sua casa no point.
                         Comece testando por 6 meses e veja se funciona pra vocês.
                     </p>
 
-                    {/* Benefits List - MUDADO */}
+                    {/* Benefits List */}
                     <div className="flex flex-wrap justify-center gap-4 mb-8">
                         {[
                             { icon: <Users className="w-5 h-5" />, text: 'R$ 62,50 dividindo por 4' },
@@ -60,7 +64,7 @@ export function CTA() {
                         ))}
                     </div>
 
-                    {/* CTAs - MUDADO */}
+                    {/* CTAs */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                         <WhatsAppButton
                             variant="hero"
@@ -81,7 +85,7 @@ export function CTA() {
                         </a>
                     </div>
 
-                    {/* Social proof - MUDADO */}
+                    {/* Social proof */}
                     <p className="text-white/80 text-sm">
                         😊 Respondemos em minutos durante horário comercial
                     </p>

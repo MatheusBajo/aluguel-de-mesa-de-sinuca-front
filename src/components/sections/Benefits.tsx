@@ -11,64 +11,23 @@ import {
     Heart
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { BENEFITS } from '@/lib/site-config';
 
 export function Benefits() {
-    const benefits = [
-        {
-            icon: <TestTube className="w-8 h-8" />,
-            title: 'Teste Antes de Comprar',
-            description: 'Descubra se você e sua família vão realmente usar. Sem gastar R$ 5.000+ para descobrir.',
-            highlight: 'Teste por 6 meses',
-            color: 'text-green-600',
-            bgColor: 'bg-green-50'
-        },
-        {
-            icon: <Users className="w-8 h-8" />,
-            title: 'Divida com os Amigos',
-            description: 'R$ 250 dividido por 4 = R$ 62,50 cada. Menos que uma mensalidade de Netflix.',
-            highlight: 'R$ 62/cada',
-            color: 'text-blue-600',
-            bgColor: 'bg-blue-50'
-        },
-        {
-            icon: <Home className="w-8 h-8" />,
-            title: 'Sua Casa Vira o Point',
-            description: 'Transforme sua casa no lugar onde todos querem se reunir. O rolê sempre vai ser na sua casa.',
-            highlight: 'Point garantido',
-            color: 'text-purple-600',
-            bgColor: 'bg-purple-50'
-        },
-
-        {
-            icon: <Wrench className="w-8 h-8" />,
-            title: 'Zero Dor de Cabeça',
-            description: 'Mesa desnivelou? Pano rasgou? Problema nosso. Você só joga, a gente cuida do resto.',
-            highlight: 'Manutenção inclusa',
-            color: 'text-orange-600',
-            bgColor: 'bg-orange-50'
-        },
-        {
-            icon: <Calendar className="w-8 h-8" />,
-            title: 'Flexibilidade Real',
-            description: 'Vai mudar? A gente leva. Galera sumiu? Cancele sem drama. Sua vida muda, o contrato também.',
-            highlight: 'Cancele quando quiser',
-            color: 'text-indigo-600',
-            bgColor: 'bg-indigo-50'
-        },
-        {
-            icon: <Heart className="w-8 h-8" />,
-            title: 'Sem Peso na Consciência',
-            description: 'Sem investimento de R$ 5.000+. Sem mesa virando cabideiro. Sem briga com a esposa.',
-            highlight: 'Consciência limpa',
-            color: 'text-red-600',
-            bgColor: 'bg-red-50'
-        }
-    ];
+    // Mapeia os ícones (config tem apenas emoji strings)
+    const iconMap: Record<string, React.ReactNode> = {
+        '🎱': <TestTube className="w-8 h-8" />,
+        '👥': <Users className="w-8 h-8" />,
+        '🏠': <Home className="w-8 h-8" />,
+        '🔧': <Wrench className="w-8 h-8" />,
+        '📅': <Calendar className="w-8 h-8" />,
+        '💚': <Heart className="w-8 h-8" />
+    };
 
     return (
         <section id="beneficios" className="py-20 bg-white">
             <div className="container mx-auto px-4">
-                {/* Header - MUDADO COPY */}
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -84,9 +43,9 @@ export function Benefits() {
                     </p>
                 </motion.div>
 
-                {/* Benefits Grid - MANTIDO DESIGN */}
+                {/* Benefits Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {benefits.map((benefit, index) => (
+                    {BENEFITS.map((benefit, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -96,7 +55,7 @@ export function Benefits() {
                         >
                             <Card className="h-full p-6 hover:shadow-xl transition-all hover:-translate-y-1">
                                 <div className={`w-16 h-16 rounded-xl ${benefit.bgColor} ${benefit.color} flex items-center justify-center mb-4`}>
-                                    {benefit.icon}
+                                    {iconMap[benefit.icon] || benefit.icon}
                                 </div>
 
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -117,7 +76,7 @@ export function Benefits() {
                     ))}
                 </div>
 
-                {/* Bottom CTA - MUDADO */}
+                {/* Bottom CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
