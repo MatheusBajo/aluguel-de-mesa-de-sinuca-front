@@ -11,10 +11,10 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { getEnabledProducts } from '@/lib/site-config';
 
 const productImages = [
-    { src: '/01-frontal-mesa-de-sinuca.png', alt: 'Vista frontal' },
-    { src: '/02-lateral-01-mesa-de-sinuca.png', alt: 'Vista lateral' },
-    { src: '/04-diagonal-45-mesa-de-sinuca.png', alt: 'Vista diagonal' },
-    { src: '/mesa-de-sinuca-fundo.png', alt: 'Mesa completa', is9x16: true }
+    { src: '/produto/01-frontal-mesa-de-sinuca.png', alt: 'Vista frontal' },
+    { src: '/produto/02-lateral-01-mesa-de-sinuca.png', alt: 'Vista lateral' },
+    { src: '/produto/04-diagonal-45-mesa-de-sinuca.png', alt: 'Vista diagonal' },
+    { src: '/produto/mesa-de-sinuca-fundo.png', alt: 'Mesa completa', is9x16: true }
 ];
 
 export function Products() {

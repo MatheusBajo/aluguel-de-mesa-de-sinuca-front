@@ -96,38 +96,43 @@ export function Hero() {
                             <span className="word inline-block">Sua</span>{' '}
                             <span className="word inline-block">Casa</span>
                         </span>
-                        <span className="block relative">
-                            <span className="word inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 animate-gradient-x relative">
-                                no Point
-                                {/* Shimmer overlay */}
-                                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" />
+                        <span className="block">
+                            <span className="word inline-block">
+                                <span className="gradient-text">no Point</span>
                             </span>
                         </span>
                     </h1>
 
                     <style jsx>{`
-                        @keyframes gradient-x {
-                            0%, 100% {
-                                background-position: 0% 50%;
+                        @keyframes gradient-flow {
+                            from {
+                                background-position: -100% center;
                             }
-                            50% {
-                                background-position: 100% 50%;
-                            }
-                        }
-                        @keyframes shimmer {
-                            0% {
-                                transform: translateX(-100%);
-                            }
-                            100% {
-                                transform: translateX(100%);
+                            to {
+                                background-position: 100% center;
                             }
                         }
-                        .animate-gradient-x {
-                            background-size: 200% 200%;
-                            animation: gradient-x 3s ease infinite;
-                        }
-                        .animate-shimmer {
-                            animation: shimmer 2s ease-in-out infinite;
+
+                        .gradient-text {
+                            display: inline-block;
+                            background: linear-gradient(
+                                    to right,
+                                    #4ade80,
+                                    #60a5fa,
+                                    #a78bfa,
+                                    #60a5fa,
+                                    #4ade80,
+                                    #60a5fa,
+                                    #a78bfa,
+                                    #60a5fa,
+                                    #4ade80
+                            );
+                            background-size: 300% auto;
+                            background-clip: text;
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            color: transparent;
+                            animation: gradient-flow 5s linear infinite;
                         }
                     `}</style>
 

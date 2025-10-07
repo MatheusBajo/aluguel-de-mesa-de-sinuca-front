@@ -33,8 +33,9 @@ export const PRODUCTS = [
         features: [
             'Perfeita pra churrasco toda semana',
             'Cabe em garagem ou área de lazer',
-            'Kit completo: tacos, bolas, giz',
-            'Manutenção sempre que precisar'
+            'Tecido verde padrão',
+            'Estrutura de Madeira ou Compensado',
+            'Kit com 7 tacos e 1 jogo de bola numerada, 1 jogo de bola lisa, 1 bolão branco, giz azul e giz branco'
         ],
         spaces: ['Garagem', 'Área de lazer', 'Salão'],
         monthlyPrice: 250,
