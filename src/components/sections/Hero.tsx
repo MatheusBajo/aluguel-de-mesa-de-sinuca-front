@@ -19,9 +19,9 @@ if (typeof window !== 'undefined') {
 // ========================================
 const ANIMATION_CONFIG = {
     // Timing
-    WORD_DELAY: 120,              // ms entre cada palavra aparecer (mais rápido)
-    HEADLINE_DISPLAY_TIME: 1250,  // ms que headline fica visível (reduzido de 4000)
-    TRANSITION_DURATION: 500,     // ms da transição entre headlines (mais rápido)
+    WORD_DELAY: 120,              // ms entre cada palavra aparecer
+    HEADLINE_DISPLAY_TIME: 2500,  // ms que headline fica visível
+    TRANSITION_DURATION: 500,     // ms da transição entre headlines
     HIGHLIGHT_DURATION: 600,      // ms da animação do highlight (grifar)
     HIGHLIGHT_STAGGER: 300,       // ms entre começar cada highlight
 
@@ -35,7 +35,7 @@ const ANIMATION_CONFIG = {
     WORD_BLUR: 8,                 // px de blur ao entrar
 };
 
-// Headlines que vão rotacionar
+// Headlines que vão rotacionar com highlights
 const HEADLINES = [
     {
         text: "A Diferença Entre 'Foi Legal' e 'Quando é o Próximo?'",
@@ -51,12 +51,30 @@ const HEADLINES = [
         ]
     },
     {
-        text: "🍖 O Que Separa Seu Churrasco dos Outros",
-        highlights: []
+        text: "🍖 O Que Separa Seu 🥩 Churrasco dos Outros",
+        highlights: [
+            {
+                phrase: "Separa",
+                backgroundColor: 'rgba(239, 68, 68, 0.35)'
+            },
+            {
+                phrase: "Churrasco dos Outros",
+                backgroundColor: 'rgba(251, 146, 60, 0.35)'
+            }
+        ]
     },
     {
-        text: "Cria a Tradição que Sua Casa Merece",
-        highlights: []
+        text: "Cria a Tradição que Sua 🏠 Casa Merece",
+        highlights: [
+            {
+                phrase: "Tradição",
+                backgroundColor: 'rgba(168, 85, 247, 0.35)'
+            },
+            {
+                phrase: "Casa Merece",
+                backgroundColor: 'rgba(34, 197, 94, 0.35)'
+            }
+        ]
     }
 ];
 
@@ -116,7 +134,7 @@ export function Hero() {
                 htmlContent = htmlContent.replace(
                     highlight.phrase,
                     `<span class="${spanClass}" data-bg="${highlight.backgroundColor}" style="
-            padding: 4px 8px;
+            padding: 2px 6px;
             border-radius: 6px;
             background-image: linear-gradient(to right, ${highlight.backgroundColor} 0%, ${highlight.backgroundColor} 0%);
             background-repeat: no-repeat;
@@ -235,54 +253,54 @@ export function Hero() {
 
             {/* Conteúdo */}
             <div className="relative z-10 container mx-auto px-4">
-                <div className="max-w-7xl mx-auto text-center px-8">
-                    {/* Badge */}
+                <div className="max-w-7xl mx-auto text-center">
+                    {/* Badge - sem opacidade */}
                     <div ref={badgeRef}>
-                        <Badge className="mb-6 bg-white/10 backdrop-blur-md text-white border-white/20 px-4 py-2">
+                        <Badge className="mb-4 md:mb-6 bg-white backdrop-blur-md text-black border-white/20 px-2.5 py-1 md:px-4 md:py-2 text-xs md:text-base">
                             🎱 A partir de R$ 250/mês
                         </Badge>
                     </div>
 
-                    {/* Headline Rotativa - HEIGHT FIXO */}
-                    <div className="h-[160px] md:h-[240px] lg:h-[280px] flex items-center justify-center mb-6">
+                    {/* Headline Rotativa - HEIGHT FIXO MAIOR NO MOBILE */}
+                    <div className="h-[220px] sm:h-[240px] lg:h-[280px] w-full flex items-center justify-center mb-4 md:mb-6 px-4 sm:px-6 md:px-10">
                         <h1
                             ref={headlineRef}
-                            className="font-display font-bold text-4xl md:text-5xl lg:text-7xl text-white leading-tight flex flex-wrap items-center justify-center gap-x-2 gap-y-1 w-full opacity-0"
-                            style={{ perspective: '1000px' }}
+                            className="font-display font-bold text-[1.75rem] sm:text-3xl md:text-5xl lg:text-7xl text-white leading-snug md:leading-tight text-center opacity-0 max-w-full"
+                            style={{ perspective: '1000px', width: '100%', display: 'block', maxWidth: 'calc(100% - 2rem)' }}
                         >
                         </h1>
                     </div>
 
-                    {/* Subheadline FIXO */}
+                    {/* Subheadline FIXO - menor no mobile */}
                     <p
                         ref={subheadRef}
-                        className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto"
+                        className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-12 max-w-2xl mx-auto px-4"
                     >
                         Churrasco bom todo mundo faz. Tradição precisa de sinuca.
                     </p>
 
-                    {/* CTAs */}
-                    <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center">
+                    {/* CTAs - botões menores no mobile */}
+                    <div ref={ctaRef} className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-4">
                         <WhatsAppButton
                             variant="hero"
                             type="pf"
-                            className="bg-green-500 hover:bg-green-600 text-white border-0 shadow-2xl"
+                            className="bg-green-500 hover:bg-green-600 text-white border-0 shadow-2xl px-3 py-2 sm:px-4 sm:py-2.5 md:px-8 md:py-4 text-[0.8rem] sm:text-sm md:text-lg"
                         >
-              <span className="flex items-center gap-2">
-                💬 Quero Criar a Tradição
-              </span>
+                            <span className="flex items-center gap-1 sm:gap-2">
+                                💬 Quero a Tradição
+                            </span>
                         </WhatsAppButton>
 
                         <a
                             href="#momentos"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-lg hover:bg-white/20 transition-all"
+                            className="inline-flex items-center justify-center gap-1 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2.5 md:px-8 md:py-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-[0.8rem] sm:text-sm md:text-lg hover:bg-white/20 transition-all"
                         >
                             Ver Como Funciona
                         </a>
                     </div>
 
-                    {/* Trust signal */}
-                    <p className="mt-8 text-white/70 text-sm">
+                    {/* Trust signal - menor no mobile */}
+                    <p className="mt-6 md:mt-8 text-white/70 text-xs md:text-sm">
                         ✓ Entregamos e montamos • ✓ Contrato 6 meses • ✓ R$ 250/mês
                     </p>
                 </div>
@@ -290,15 +308,15 @@ export function Hero() {
 
             {/* Scroll indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-                <ChevronDown className="w-8 h-8 text-white/60" />
+                <ChevronDown className="w-6 h-6 md:w-8 md:h-8 text-white/60" />
             </div>
 
             {/* Estilos CSS adicionais */}
             <style jsx>{`
-        .word-animated {
-          will-change: transform, opacity, filter;
-        }
-      `}</style>
+                .word-animated {
+                    will-change: transform, opacity, filter;
+                }
+            `}</style>
         </section>
     );
 }
