@@ -19,11 +19,11 @@ if (typeof window !== 'undefined') {
 // ========================================
 const ANIMATION_CONFIG = {
     // Timing
-    WORD_DELAY: 150,              // ms entre cada palavra aparecer
-    HEADLINE_DISPLAY_TIME: 4000,  // ms que headline fica visível após animação completa
-    TRANSITION_DURATION: 600,     // ms da transição entre headlines (mais rápido)
-    HIGHLIGHT_DURATION: 800,      // ms da animação do highlight (grifar)
-    HIGHLIGHT_STAGGER: 400,       // ms entre começar cada highlight
+    WORD_DELAY: 120,              // ms entre cada palavra aparecer (mais rápido)
+    HEADLINE_DISPLAY_TIME: 1250,  // ms que headline fica visível (reduzido de 4000)
+    TRANSITION_DURATION: 500,     // ms da transição entre headlines (mais rápido)
+    HIGHLIGHT_DURATION: 600,      // ms da animação do highlight (grifar)
+    HIGHLIGHT_STAGGER: 300,       // ms entre começar cada highlight
 
     // Easing
     WORD_EASE: 'power3.out',
@@ -31,8 +31,8 @@ const ANIMATION_CONFIG = {
     HIGHLIGHT_EASE: 'power2.out',
 
     // Efeitos visuais
-    WORD_Y_DISTANCE: 20,          // px que palavra sobe ao entrar
-    WORD_BLUR: 4,                 // px de blur ao entrar
+    WORD_Y_DISTANCE: 64,          // px que palavra sobe ao entrar
+    WORD_BLUR: 8,                 // px de blur ao entrar
 };
 
 // Headlines que vão rotacionar
@@ -112,10 +112,19 @@ export function Hero() {
 
             // Envolver frases destacadas em spans
             headline.highlights.forEach((highlight, index) => {
-                const spanClass = `highlight-${index}`;
+                const spanClass = `highlight-span-${index}`;
                 htmlContent = htmlContent.replace(
                     highlight.phrase,
-                    `<span class="${spanClass}" style="background-color: ${highlight.backgroundColor}; padding: 4px 8px; border-radius: 6px; box-decoration-break: clone; -webkit-box-decoration-break: clone; display: inline;">${highlight.phrase}</span>`
+                    `<span class="${spanClass}" data-bg="${highlight.backgroundColor}" style="
+            padding: 4px 8px;
+            border-radius: 6px;
+            background-image: linear-gradient(to right, ${highlight.backgroundColor} 0%, ${highlight.backgroundColor} 0%);
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            display: inline;
+          ">${highlight.phrase}</span>`
                 );
             });
 
@@ -126,6 +135,11 @@ export function Hero() {
 
             // Pequeno delay antes de começar a animar
             gsap.delayedCall(0.15, () => {
+                // Pegar todos os spans de highlight ANTES do SplitText
+                const highlightSpans = headline.highlights.map((_, index) =>
+                    headlineElement.querySelector(`.highlight-span-${index}`)
+                );
+
                 // Split text em palavras (vai preservar os spans de highlight)
                 const split = new SplitText(headlineElement, {
                     type: 'words',
@@ -174,6 +188,20 @@ export function Hero() {
                     duration: 0.6,
                     stagger: ANIMATION_CONFIG.WORD_DELAY / 1000,
                     ease: ANIMATION_CONFIG.WORD_EASE
+                });
+
+                // Animar highlights (efeito de grifar com background-size)
+                highlightSpans.forEach((span, index) => {
+                    if (span) {
+                        // Calcular quando começar a grifar
+                        const startDelay = (index * ANIMATION_CONFIG.HIGHLIGHT_STAGGER / 1000) + 0.4;
+
+                        tl.to(span, {
+                            backgroundSize: '100% 100%',
+                            duration: ANIMATION_CONFIG.HIGHLIGHT_DURATION / 1000,
+                            ease: ANIMATION_CONFIG.HIGHLIGHT_EASE
+                        }, startDelay);
+                    }
                 });
 
                 timelineRef.current = tl;
