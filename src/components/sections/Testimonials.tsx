@@ -3,10 +3,66 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight, Home, Building } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { TESTIMONIALS } from '@/lib/site-config';
+
+const TESTIMONIALS = [
+    {
+        id: '1',
+        name: 'Carlos Eduardo',
+        location: 'Vila Mariana',
+        months: '8 meses',
+        text: 'Minha esposa zuava que ia virar cabideiro. Hoje ela joga melhor que eu e fica pistola quando perco de propósito kkkk',
+        highlight: 'Família jogando junto',
+        rating: 5
+    },
+    {
+        id: '2',
+        name: 'Marcão',
+        location: 'Santo André',
+        months: '1 ano',
+        text: 'Todo final de semana tem torneio aqui em casa. Virei o salão oficial da turma. Melhor investimento que já fiz',
+        highlight: 'Casa virou point',
+        rating: 5
+    },
+    {
+        id: '3',
+        name: 'Fernando',
+        location: 'Pinheiros',
+        months: '4 meses',
+        text: 'Pensei que ia usar 3x no máximo. Uso todo dia antes do trampo pra relaxar. Virou terapia',
+        highlight: 'Uso diário',
+        rating: 5
+    },
+    {
+        id: '4',
+        name: 'Junior',
+        location: 'Guarulhos',
+        months: '6 meses',
+        text: 'Meu sogro era contra a mesa. Agora ele vem aqui direto com os amigos dele jogar kkkkkk',
+        highlight: 'Convenceu até o sogro',
+        rating: 5
+    },
+    {
+        id: '5',
+        name: 'Rodrigo',
+        location: 'São Bernardo',
+        months: '10 meses',
+        text: 'Achei que ia enjoar rápido. Criei um grupo no zap só pra marcar as partidas. Tem fila de espera',
+        highlight: 'Grupo dedicado',
+        rating: 5
+    },
+    {
+        id: '6',
+        name: 'Thiago',
+        location: 'Moema',
+        months: '5 meses',
+        text: 'Antes o churrasco acabava cedo e todo mundo ia embora. Agora o pessoal fica jogando até dar horário. Ninguém quer ir embora',
+        highlight: 'Churrasco épico',
+        rating: 5
+    }
+];
 
 export function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,15 +86,14 @@ export function Testimonials() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        Clientes <span className="text-primary-600">Satisfeitos</span>
+                        O Que Nossos <span className="text-primary-600">Clientes</span> Falam
                     </h2>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Veja o que nossos clientes têm a dizer sobre a experiência
-                        de alugar uma mesa de sinuca conosco.
+                        Depoimentos reais de quem alugou e não se arrepende
                     </p>
                 </motion.div>
 
-                {/* Main Testimonial Carousel */}
+                {/* Main Carousel */}
                 <div className="max-w-4xl mx-auto mb-16">
                     <Card className="relative overflow-hidden">
                         <AnimatePresence mode="wait">
@@ -50,54 +105,35 @@ export function Testimonials() {
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 className="p-8 md:p-12"
                             >
-                                {/* Quote Icon */}
-                                <div className="text-6xl text-primary-100 mb-4">&ldquo;</div>
+                                {/* Stars */}
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                                    ))}
+                                </div>
 
-                                {/* Content */}
+                                {/* Text */}
                                 <p className="text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">
-                                    {TESTIMONIALS[currentIndex].content}
+                                    "{TESTIMONIALS[currentIndex].text}"
                                 </p>
 
-                                {/* Author Info */}
+                                {/* Author */}
                                 <div className="flex items-center justify-between flex-wrap gap-4">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-xl">
-                                            {TESTIMONIALS[currentIndex].name.split(' ').map(n => n[0]).join('')}
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-gray-900">
-                                                {TESTIMONIALS[currentIndex].name}
-                                            </h4>
-                                            <p className="text-sm text-gray-600">
-                                                {TESTIMONIALS[currentIndex].role}
-                                            </p>
-                                            <div className="flex items-center gap-2 mt-1">
-                                                <Badge variant="secondary" className="text-xs">
-                                                    {TESTIMONIALS[currentIndex].type === 'pf' ? (
-                                                        <><Home className="w-3 h-3 mr-1" /> Residencial</>
-                                                    ) : (
-                                                        <><Building className="w-3 h-3 mr-1" /> Empresarial</>
-                                                    )}
-                                                </Badge>
-                                                <span className="text-xs text-gray-500">
-                                                    {TESTIMONIALS[currentIndex].months}
-                                                </span>
-                                            </div>
-                                        </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 text-lg">
+                                            {TESTIMONIALS[currentIndex].name}
+                                        </h4>
+                                        <p className="text-gray-600">
+                                            {TESTIMONIALS[currentIndex].location}
+                                        </p>
+                                        <p className="text-sm text-gray-500 mt-1">
+                                            {TESTIMONIALS[currentIndex].months}
+                                        </p>
                                     </div>
 
-                                    <div className="text-right">
-                                        {/* Stars */}
-                                        <div className="flex gap-1 mb-2">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                                            ))}
-                                        </div>
-                                        {/* Highlight */}
-                                        <Badge className="bg-green-100 text-green-700 border-green-200">
-                                            ✓ {TESTIMONIALS[currentIndex].highlight}
-                                        </Badge>
-                                    </div>
+                                    <Badge className="bg-green-100 text-green-700 border-green-200">
+                                        ✓ {TESTIMONIALS[currentIndex].highlight}
+                                    </Badge>
                                 </div>
                             </motion.div>
                         </AnimatePresence>
@@ -121,7 +157,7 @@ export function Testimonials() {
                         </div>
                     </Card>
 
-                    {/* Dots Indicator */}
+                    {/* Dots */}
                     <div className="flex justify-center gap-2 mt-6">
                         {TESTIMONIALS.map((_, index) => (
                             <button

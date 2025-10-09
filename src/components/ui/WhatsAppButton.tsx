@@ -1,8 +1,7 @@
-// ==================================================
 // src/components/ui/WhatsAppButton.tsx
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import Image from 'next/image';
 import { useWhatsApp } from '@/hooks/useWhatsApp';
 import { cn } from '@/lib/utils';
 
@@ -26,7 +25,7 @@ export function WhatsAppButton({
     const finalMessage = message || generateMessage(type);
 
     const variants = {
-        floating: 'fixed bottom-6 right-6 z-50 rounded-full shadow-2xl hover:scale-110 bg-green-500 hover:bg-green-600 p-4',
+        floating: 'fixed bottom-6 right-6 z-50 rounded-full shadow-2xl hover:scale-110 transition-transform',
         inline: 'inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium transition-all hover:scale-105',
         hero: 'inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all'
     };
@@ -37,8 +36,28 @@ export function WhatsAppButton({
             className={cn(variants[variant], className)}
             aria-label="Contato via WhatsApp"
         >
-            <MessageCircle className={variant === 'floating' ? 'w-8 h-8' : 'w-6 h-6'} />
-            {variant !== 'floating' && (children || 'Falar no WhatsApp')}
+            {variant === 'floating' ? (
+                // Floating usa imagem 256px
+                <Image
+                    src="/images/whatsapp/256px-WhatsApp.png"
+                    alt="WhatsApp"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16"
+                />
+            ) : (
+                // Inline/hero usa imagem 64px
+                <>
+                    <Image
+                        src="/images/whatsapp/64px-WhatsApp.png"
+                        alt="WhatsApp"
+                        width={24}
+                        height={24}
+                        className="w-6 h-6"
+                    />
+                    {children || 'Falar no WhatsApp'}
+                </>
+            )}
         </button>
     );
 }
