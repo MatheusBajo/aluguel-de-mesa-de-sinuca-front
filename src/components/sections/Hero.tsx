@@ -9,28 +9,19 @@ import { ChevronDown } from 'lucide-react';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { Badge } from '@/components/ui/badge';
 
-// Registrar plugin
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(SplitText);
 }
 
-// ========================================
-// 🎨 CONFIGURAÇÕES GLOBAIS DA ANIMAÇÃO
-// ========================================
 const ANIMATION_CONFIG = {
-    // Timing
     WORD_DELAY: 120,
     HEADLINE_DISPLAY_TIME: 2500,
     TRANSITION_DURATION: 500,
     HIGHLIGHT_DURATION: 600,
     HIGHLIGHT_STAGGER: 300,
-
-    // Easing
     WORD_EASE: 'power3.out',
     TRANSITION_EASE: 'power2.inOut',
     HIGHLIGHT_EASE: 'power2.out',
-
-    // Efeitos visuais (só desktop)
     WORD_Y_DISTANCE: 64,
     WORD_BLUR: 8,
 };
@@ -39,40 +30,22 @@ const HEADLINES = [
     {
         text: "A Diferença Entre Foi Legal 😊 e Quando é o Próximo? 🤩",
         highlights: [
-            {
-                phrase: "Foi Legal 😊",
-                backgroundColor: 'rgba(234, 179, 8, 0.35)'
-            },
-            {
-                phrase: "Quando é o Próximo? 🤩",
-                backgroundColor: 'rgba(74, 222, 128, 0.35)'
-            }
+            { phrase: "Foi Legal 😊", backgroundColor: 'rgba(234, 179, 8, 0.35)' },
+            { phrase: "Quando é o Próximo? 🤩", backgroundColor: 'rgba(74, 222, 128, 0.35)' }
         ]
     },
     {
         text: "O Que Separa Seu Churrasco 🔥 dos Outros",
         highlights: [
-            {
-                phrase: "Separa",
-                backgroundColor: 'rgba(239, 68, 68, 0.35)'
-            },
-            {
-                phrase: "Churrasco 🔥 dos Outros",
-                backgroundColor: 'rgba(251, 146, 60, 0.35)'
-            }
+            { phrase: "Separa", backgroundColor: 'rgba(239, 68, 68, 0.35)' },
+            { phrase: "Churrasco 🔥 dos Outros", backgroundColor: 'rgba(251, 146, 60, 0.35)' }
         ]
     },
     {
         text: "Cria a Tradição 🏆 que Sua Casa Merece 🏠",
         highlights: [
-            {
-                phrase: "Tradição 🏆",
-                backgroundColor: 'rgba(168, 85, 247, 0.35)'
-            },
-            {
-                phrase: "Casa Merece 🏠",
-                backgroundColor: 'rgba(34, 197, 94, 0.35)'
-            }
+            { phrase: "Tradição 🏆", backgroundColor: 'rgba(168, 85, 247, 0.35)' },
+            { phrase: "Casa Merece 🏠", backgroundColor: 'rgba(34, 197, 94, 0.35)' }
         ]
     }
 ];
@@ -86,44 +59,23 @@ export function Hero() {
     const [isMobile, setIsMobile] = useState(false);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-    // Detectar mobile
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    // Animação inicial (badge, subhead, cta) - LEVE
     useEffect(() => {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-            tl.from(badgeRef.current, {
-                opacity: 0,
-                y: -20,
-                duration: 0.6
-            });
-
-            tl.from(subheadRef.current, {
-                opacity: 0,
-                y: 30,
-                duration: 0.8
-            }, '-=0.2');
-
-            tl.from(ctaRef.current, {
-                opacity: 0,
-                y: 30,
-                duration: 0.6
-            }, '-=0.2');
+            tl.from(badgeRef.current, { opacity: 0, y: -20, duration: 0.6 });
+            tl.from(subheadRef.current, { opacity: 0, y: 30, duration: 0.8 }, '-=0.2');
+            tl.from(ctaRef.current, { opacity: 0, y: 30, duration: 0.6 }, '-=0.2');
         });
-
         return () => ctx.revert();
     }, []);
 
-    // Animação das headlines rotativas
     useEffect(() => {
         if (!headlineRef.current) return;
 
@@ -133,7 +85,6 @@ export function Hero() {
             if (!headlineElement) return;
 
             headlineElement.innerHTML = '';
-
             let htmlContent = headline.text;
 
             headline.highlights.forEach((highlight, index) => {
@@ -141,17 +92,17 @@ export function Hero() {
                 htmlContent = htmlContent.replace(
                     highlight.phrase,
                     `<span class="${spanClass}" data-bg="${highlight.backgroundColor}" style="
-            padding: 3px 8px;
-            border-radius: 6px;
-            background-image: linear-gradient(to right, ${highlight.backgroundColor} 0%, ${highlight.backgroundColor} 0%);
-            background-repeat: no-repeat;
-            background-size: 0% 100%;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            display: inline;
-            text-transform: uppercase;
-            font-weight: 700;
-          ">${highlight.phrase}</span>`
+                        padding: 3px 8px;
+                        border-radius: 6px;
+                        background-image: linear-gradient(to right, ${highlight.backgroundColor} 0%, ${highlight.backgroundColor} 0%);
+                        background-repeat: no-repeat;
+                        background-size: 0% 100%;
+                        box-decoration-break: clone;
+                        -webkit-box-decoration-break: clone;
+                        display: inline;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                    ">${highlight.phrase}</span>`
                 );
             });
 
@@ -168,14 +119,12 @@ export function Hero() {
                     wordsClass: 'word-animated'
                 });
 
-                gsap.set(split.words, {
-                    display: 'inline-block',
-                    margin: '0 2px'
-                });
+                gsap.set(split.words, { display: 'inline-block', margin: '0 2px' });
 
                 const tl = gsap.timeline({
                     onComplete: () => {
                         gsap.delayedCall(ANIMATION_CONFIG.HEADLINE_DISPLAY_TIME / 1000, () => {
+                            // Fade out sem blur no mobile
                             gsap.to(headlineElement, {
                                 opacity: 0,
                                 duration: ANIMATION_CONFIG.TRANSITION_DURATION / 1000,
@@ -189,8 +138,6 @@ export function Hero() {
                     }
                 });
 
-                // Mobile: animação simples fade
-                // Desktop: animação completa com blur/transform
                 if (isMobile) {
                     gsap.set(split.words, { opacity: 0 });
                     gsap.set(headlineElement, { opacity: 1 });
@@ -220,7 +167,6 @@ export function Hero() {
                     });
                 }
 
-                // Animar highlights (funciona igual em mobile e desktop)
                 highlightSpans.forEach((span, index) => {
                     if (span) {
                         const startDelay = (index * ANIMATION_CONFIG.HIGHLIGHT_STAGGER / 1000) + 0.4;
@@ -237,17 +183,14 @@ export function Hero() {
         };
 
         animateHeadline();
-
         return () => {
-            if (timelineRef.current) {
-                timelineRef.current.kill();
-            }
+            if (timelineRef.current) timelineRef.current.kill();
         };
     }, [currentIndex, isMobile]);
 
     return (
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
-            {/* Imagem de fundo */}
+            {/* Background */}
             <div className="absolute inset-0 z-0">
                 <Image
                     src="/mesa-de-sinuca-light.png"
@@ -261,37 +204,27 @@ export function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             </div>
 
-            {/* Conteúdo */}
+            {/* Content */}
             <div className="relative z-10 container mx-auto px-4">
                 <div className="max-w-7xl mx-auto text-center">
-                    {/* Badge principal */}
+                    {/* Badge com glassmorphism */}
                     <div ref={badgeRef} className="mb-6">
-                        <Badge className="backdrop-blur-md bg-white/10 border border-white/20 text-white px-4 py-2 text-base font-semibold">
+                        <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 text-foreground px-4 py-2 text-base font-semibold border border-white/30 dark:border-white/20">
                             🎱 A partir de R$ 250/mês
                         </Badge>
                     </div>
 
-                    {/* Headline Rotativa */}
+                    {/* Headline */}
                     <div className="h-[220px] sm:h-[240px] lg:h-[280px] w-full flex items-center justify-center mb-6 px-4 sm:px-6 md:px-10">
                         <h1
                             ref={headlineRef}
                             className="font-display font-bold text-[1.75rem] sm:text-3xl md:text-5xl lg:text-7xl text-white text-center opacity-0 max-w-full"
-                            style={{
-                                perspective: '1000px',
-                                width: '100%',
-                                display: 'block',
-                                maxWidth: 'calc(100% - 2rem)',
-                                lineHeight: '1.55'
-                            }}
-                        >
-                        </h1>
+                            style={{ perspective: '1000px', width: '100%', display: 'block', maxWidth: 'calc(100% - 2rem)', lineHeight: '1.55' }}
+                        />
                     </div>
 
                     {/* Subheadline */}
-                    <p
-                        ref={subheadRef}
-                        className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto px-4"
-                    >
+                    <p ref={subheadRef} className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto px-4">
                         Churrasco bom todo mundo faz. Tradição precisa de sinuca.
                     </p>
 
@@ -300,28 +233,27 @@ export function Hero() {
                         <WhatsAppButton
                             variant="hero"
                             type="pf"
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-2xl px-4 py-3 md:px-8 md:py-4 text-sm md:text-lg border-0 justify-center"
+                            className="bg-[var(--color-brand-green)] hover:bg-[#047857] text-white shadow-2xl px-4 py-3 md:px-8 md:py-4 text-sm md:text-lg border-0 justify-center"
                         >
                             Entrar em Contato
                         </WhatsAppButton>
-
                         <a
                             href="#momentos"
-                            className="inline-flex items-center justify-center gap-2 px-4 py-3 md:px-8 md:py-4 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white font-bold text-sm md:text-lg hover:bg-white/20 transition-all"
+                            className="inline-flex items-center justify-center gap-2 px-4 py-3 md:px-8 md:py-4 rounded-xl glass-gradient border-white/20 text-white font-bold text-sm md:text-lg hover:scale-105 transition-all"
                         >
                             Ver Como Funciona
                         </a>
                     </div>
 
-                    {/* Trust badges - Glassmorphism */}
+                    {/* Trust badges com glassmorphism */}
                     <div className="flex flex-wrap justify-center gap-3 px-4">
-                        <Badge className="backdrop-blur-md bg-white/10 border border-white/20 text-white px-4 py-2">
+                        <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
                             ✓ Entregamos e montamos
                         </Badge>
-                        <Badge className="backdrop-blur-md bg-white/10 border border-white/20 text-white px-4 py-2">
+                        <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
                             ✓ Contrato 6 meses
                         </Badge>
-                        <Badge className="backdrop-blur-md bg-white/10 border border-white/20 text-white px-4 py-2">
+                        <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
                             ✓ R$ 250/mês
                         </Badge>
                     </div>

@@ -7,9 +7,11 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function CTA() {
     return (
-        <section className="py-20 bg-gradient-to-br from-primary-600 to-accent-600 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 bg-black/10" />
+        <section className="relative py-20 overflow-hidden">
+            {/* Background com gradiente verde */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-green)] to-[#047857]" />
+
+            {/* Pattern glassmorphism overlay */}
             <div className="absolute inset-0">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
                 <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
@@ -46,9 +48,9 @@ export function CTA() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full"
+                                className="flex items-center gap-2 glass-gradient px-4 py-2 rounded-full border-white/20"
                             >
-                                <span className="text-yellow-300">{item.icon}</span>
+                                <span className="text-[var(--color-brand-yellow)]">{item.icon}</span>
                                 <span className="text-white font-medium">{item.text}</span>
                             </motion.div>
                         ))}
@@ -58,7 +60,7 @@ export function CTA() {
                     <div className="mb-8">
                         <WhatsAppButton
                             variant="hero"
-                            className="bg-white text-primary-600 hover:bg-gray-100 shadow-2xl"
+                            className="bg-white text-[var(--color-brand-green)] hover:bg-gray-100 shadow-2xl border-0"
                             message="Oi! Quero transformar minha casa no point. Como funciona?"
                         >
                             <span className="flex items-center gap-2">

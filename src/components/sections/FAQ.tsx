@@ -1,12 +1,12 @@
 // src/components/sections/FAQ.tsx
 'use client';
 
-import {motion} from 'framer-motion';
-import {HelpCircle} from 'lucide-react';
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from '@/components/ui/accordion';
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {WhatsAppButton} from '@/components/ui/WhatsAppButton';
-import {Card} from "@/components/ui/card";
+import { motion } from 'framer-motion';
+import { HelpCircle } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { Card } from "@/components/ui/card";
 
 export function FAQ() {
     const faqs = {
@@ -31,37 +31,37 @@ export function FAQ() {
         service: [
             {
                 question: 'A mesa é nova ou usada?',
-                answer: 'Sinceridade: usada, mas revisada profissionalmente. Trocamos pano se precisar, nivelamos, certificamos. Você recebe uma mesa em perfeito estado de jogo, só não paga preço de nova.'
+                answer: 'Usada, mas revisada profissionalmente. Trocamos pano se necessário, nivelamos e certificamos. Você recebe uma mesa em perfeito estado de jogo, sem pagar preço de nova.'
             },
             {
                 question: 'E se a mesa der problema?',
-                answer: 'Consertamos ou trocamos. Manutenção tá inclusa no aluguel. Pano rasgou? Mesa empenou? Problema nosso. Em 2-3 dias resolvemos. Se for grave, trocamos a mesa inteira.'
+                answer: 'Consertamos ou trocamos. A manutenção está inclusa no aluguel. Qualquer problema que surgir, é nossa responsabilidade resolver.'
             },
             {
                 question: 'Posso trocar de mesa durante o contrato?',
-                answer: 'Pode. Se quiser uma maior, menor, ou diferente, a gente conversa e resolve. Pode ter custo adicional dependendo do caso, mas é sempre transparente.'
+                answer: 'Sim. Se quiser uma maior, menor ou diferente, conversamos e resolvemos. Pode ter custo adicional dependendo do caso, mas é sempre transparente.'
             },
             {
                 question: 'Vocês dão aulas de sinuca?',
-                answer: 'Não. Nossos técnicos dão dicas básicas na instalação (como segurar o taco, bater na bola). Pra aulas de verdade, procure um professor especializado.'
+                answer: 'Não. Nossos técnicos dão dicas básicas na instalação (como segurar o taco, bater na bola). Para aulas de verdade, procure um professor especializado.'
             }
         ],
         delivery: [
             {
                 question: 'Demora quanto pra entregar?',
-                answer: 'Depende da região e estoque. Geralmente 3-7 dias úteis após você assinar o contrato. Sempre agendamos dia e horário que funcionem pra você.'
+                answer: 'Depende da região e estoque. Sempre agendamos dia e horário que funcionem para você após a confirmação do contrato.'
             },
             {
                 question: 'Quem monta a mesa?',
-                answer: 'Nossa equipe. Leva 1-2 horas. Deixamos tudo nivelado, pronto pra jogar no mesmo dia. Você não encosta um dedo.'
+                answer: 'Nossa equipe. Deixamos tudo nivelado, pronto para jogar no mesmo dia. Você não precisa fazer nada.'
             },
             {
                 question: 'E se eu morar em apartamento?',
-                answer: 'A gente avalia antes. Mesa precisa caber no elevador ou subir pela escada (até 3º andar normalmente). Se não der, devolvemos seu dinheiro. Sem pegadinha.'
+                answer: 'Avaliamos antes. A mesa precisa caber no elevador ou subir pela escada. Se não for viável, devolvemos seu dinheiro.'
             },
             {
                 question: 'Quanto espaço preciso?',
-                answer: 'Ideal: 4m x 3m (1,5m livre de cada lado pra jogar confortável). Mas a gente se adapta. Se o espaço for apertado, recomendamos a mesa menor ou te mostramos como funciona antes de instalar.'
+                answer: 'Ideal: 4m x 3m (1,5m livre de cada lado para jogar confortável). Mas nos adaptamos. Se o espaço for apertado, recomendamos a mesa menor ou mostramos como funciona antes de instalar.'
             }
         ]
     };
@@ -73,7 +73,7 @@ export function FAQ() {
     ];
 
     return (
-        <section id="faq" className="py-20 bg-gray-50">
+        <section id="faq" className="py-20 bg-muted/30">
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <motion.div
@@ -82,10 +82,10 @@ export function FAQ() {
                     viewport={{ once: true }}
                     className="text-center mb-12"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
                         Perguntas Diretas, Respostas Honestas
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                         Zero enrolação. Se não tiver aqui, manda no WhatsApp que a gente responde na hora.
                     </p>
                 </motion.div>
@@ -98,7 +98,7 @@ export function FAQ() {
                     className="max-w-3xl mx-auto"
                 >
                     <Tabs defaultValue="pricing" className="w-full">
-                        <TabsList className="grid w-full grid-cols-3 mb-8">
+                        <TabsList className="grid w-full grid-cols-3 mb-8 glass-gradient border-border">
                             {categories.map(category => (
                                 <TabsTrigger
                                     key={category.id}
@@ -117,14 +117,14 @@ export function FAQ() {
                                         <AccordionItem
                                             key={index}
                                             value={`item-${index}`}
-                                            className="bg-white rounded-lg shadow-sm border"
+                                            className="glass-gradient rounded-lg shadow-sm border-border"
                                         >
                                             <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
-                                                <span className="font-semibold text-gray-900">
+                                                <span className="font-semibold text-foreground">
                                                     {faq.question}
                                                 </span>
                                             </AccordionTrigger>
-                                            <AccordionContent className="px-6 text-gray-600 pb-4">
+                                            <AccordionContent className="px-6 text-muted-foreground pb-4">
                                                 {faq.answer}
                                             </AccordionContent>
                                         </AccordionItem>
@@ -142,18 +142,19 @@ export function FAQ() {
                     viewport={{ once: true }}
                     className="mt-12 text-center"
                 >
-                    <Card className="inline-block p-8 bg-gradient-to-r from-primary-50 to-accent-50">
-                        <HelpCircle className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    <Card className="inline-block p-8 glass-gradient border-border">
+                        <HelpCircle className="w-12 h-12 text-[var(--color-brand-green)] mx-auto mb-4" />
+                        <h3 className="text-xl font-bold text-foreground mb-2">
                             Ainda com dúvida?
                         </h3>
-                        <p className="text-gray-600 mb-6 max-w-md">
+                        <p className="text-muted-foreground mb-6 max-w-md">
                             Chama no WhatsApp. Respondemos rápido e sem enrolação.
                         </p>
                         <WhatsAppButton
                             variant="hero"
                             type="custom"
                             message="Oi! Vi o site e tenho algumas dúvidas. Podem me ajudar?"
+                            className="bg-[var(--color-brand-green)] hover:bg-[#047857]"
                         >
                             Chamar no WhatsApp
                         </WhatsAppButton>

@@ -3,69 +3,17 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
-const TESTIMONIALS = [
-    {
-        id: '1',
-        name: 'Carlos Eduardo',
-        location: 'Vila Mariana',
-        months: '8 meses',
-        text: 'Minha esposa zuava que ia virar cabideiro. Hoje ela joga melhor que eu e fica pistola quando perco de propósito kkkk',
-        highlight: 'Família jogando junto',
-        rating: 5
-    },
-    {
-        id: '2',
-        name: 'Marcão',
-        location: 'Santo André',
-        months: '1 ano',
-        text: 'Todo final de semana tem torneio aqui em casa. Virei o salão oficial da turma. Melhor investimento que já fiz',
-        highlight: 'Casa virou point',
-        rating: 5
-    },
-    {
-        id: '3',
-        name: 'Fernando',
-        location: 'Pinheiros',
-        months: '4 meses',
-        text: 'Pensei que ia usar 3x no máximo. Uso todo dia antes do trampo pra relaxar. Virou terapia',
-        highlight: 'Uso diário',
-        rating: 5
-    },
-    {
-        id: '4',
-        name: 'Junior',
-        location: 'Guarulhos',
-        months: '6 meses',
-        text: 'Meu sogro era contra a mesa. Agora ele vem aqui direto com os amigos dele jogar kkkkkk',
-        highlight: 'Convenceu até o sogro',
-        rating: 5
-    },
-    {
-        id: '5',
-        name: 'Rodrigo',
-        location: 'São Bernardo',
-        months: '10 meses',
-        text: 'Achei que ia enjoar rápido. Criei um grupo no zap só pra marcar as partidas. Tem fila de espera',
-        highlight: 'Grupo dedicado',
-        rating: 5
-    },
-    {
-        id: '6',
-        name: 'Thiago',
-        location: 'Moema',
-        months: '5 meses',
-        text: 'Antes o churrasco acabava cedo e todo mundo ia embora. Agora o pessoal fica jogando até dar horário. Ninguém quer ir embora',
-        highlight: 'Churrasco épico',
-        rating: 5
-    }
-];
+import { TESTIMONIALS } from '@/lib/site-config';
 
 export function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState(0);
 
     const nextTestimonial = () => {
         setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
@@ -75,8 +23,53 @@ export function Testimonials() {
         setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
     };
 
+    // Swipe handlers
+    const handleTouchStart = (e: React.TouchEvent) => {
+        setTouchStart(e.targetTouches[0].clientX);
+        setIsDragging(true);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        const currentTouch = e.targetTouches[0].clientX;
+        setTouchEnd(currentTouch);
+
+        let offset = currentTouch - touchStart;
+
+        // Resistência nas bordas
+        if ((currentIndex === 0 && offset > 0) ||
+            (currentIndex === TESTIMONIALS.length - 1 && offset < 0)) {
+            offset = offset * 0.3;
+        }
+
+        setDragOffset(offset);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) {
+            setIsDragging(false);
+            setDragOffset(0);
+            return;
+        }
+
+        const distance = touchStart - touchEnd;
+        const threshold = 75;
+
+        if (Math.abs(distance) > threshold) {
+            if (distance > 0) {
+                nextTestimonial();
+            } else {
+                prevTestimonial();
+            }
+        }
+
+        setIsDragging(false);
+        setDragOffset(0);
+        setTouchStart(0);
+        setTouchEnd(0);
+    };
+
     return (
-        <section id="depoimentos" className="py-20 bg-white">
+        <section id="depoimentos" className="py-20 bg-background">
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <motion.div
@@ -85,88 +78,136 @@ export function Testimonials() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                        O Que Nossos <span className="text-primary-600">Clientes</span> Falam
+                    <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                        O Que Nossos <span className="text-[var(--color-brand-green)]">Clientes</span> Falam
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                         Depoimentos reais de quem alugou e não se arrepende
                     </p>
                 </motion.div>
 
                 {/* Main Carousel */}
                 <div className="max-w-4xl mx-auto mb-16">
-                    <Card className="relative overflow-hidden">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={TESTIMONIALS[currentIndex].id}
-                                initial={{ opacity: 0, x: 100 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -100 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className="p-8 md:p-12"
-                            >
-                                {/* Stars */}
-                                <div className="flex gap-1 mb-6">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-                                    ))}
-                                </div>
+                    <motion.div
+                        className="relative"
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                        animate={{
+                            x: isDragging ? dragOffset * 0.8 : 0,
+                            scale: isDragging ? 0.98 : 1,
+                        }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30
+                        }}
+                    >
+                        <Card className="glass-gradient relative overflow-hidden border-border">
+                            <AnimatePresence mode="wait" initial={false}>
+                                <motion.div
+                                    key={TESTIMONIALS[currentIndex].id}
+                                    initial={{ opacity: 0, x: 100 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -100 }}
+                                    transition={{ duration: 0.3, ease: "easeOut" }}
+                                    className="p-8 md:p-12"
+                                >
+                                    {/* Quote icon */}
+                                    <div className="flex items-start gap-4 mb-6">
+                                        <div className="p-3 rounded-full bg-[var(--color-brand-green)]/10">
+                                            <Quote className="w-8 h-8 text-[var(--color-brand-green)]" />
+                                        </div>
 
-                                {/* Text */}
-                                <p className="text-xl md:text-2xl text-gray-700 mb-6 leading-relaxed">
-                                    "{TESTIMONIALS[currentIndex].text}"
-                                </p>
-
-                                {/* Author */}
-                                <div className="flex items-center justify-between flex-wrap gap-4">
-                                    <div>
-                                        <h4 className="font-bold text-gray-900 text-lg">
-                                            {TESTIMONIALS[currentIndex].name}
-                                        </h4>
-                                        <p className="text-gray-600">
-                                            {TESTIMONIALS[currentIndex].location}
-                                        </p>
-                                        <p className="text-sm text-gray-500 mt-1">
-                                            {TESTIMONIALS[currentIndex].months}
-                                        </p>
+                                        {/* Stars */}
+                                        <div className="flex gap-1">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star key={i} className="w-5 h-5 fill-[var(--color-brand-yellow)] text-[var(--color-brand-yellow)]" />
+                                            ))}
+                                        </div>
                                     </div>
 
-                                    <Badge className="bg-green-100 text-green-700 border-green-200">
-                                        ✓ {TESTIMONIALS[currentIndex].highlight}
-                                    </Badge>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
+                                    {/* Text */}
+                                    <p className="text-xl md:text-2xl text-foreground mb-8 leading-relaxed">
+                                        "{TESTIMONIALS[currentIndex].content}"
+                                    </p>
 
-                        {/* Navigation */}
-                        <div className="absolute bottom-4 right-4 flex gap-2">
-                            <button
-                                onClick={prevTestimonial}
-                                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-                                aria-label="Depoimento anterior"
-                            >
-                                <ChevronLeft className="w-5 h-5" />
-                            </button>
-                            <button
-                                onClick={nextTestimonial}
-                                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-                                aria-label="Próximo depoimento"
-                            >
-                                <ChevronRight className="w-5 h-5" />
-                            </button>
-                        </div>
-                    </Card>
+                                    {/* Author info */}
+                                    <div className="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-border">
+                                        <div className="flex items-center gap-4">
+                                            {/* Avatar placeholder */}
+                                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-brand-green)] to-[var(--color-brand-yellow)] flex items-center justify-center text-white font-bold text-lg">
+                                                {TESTIMONIALS[currentIndex].name.charAt(0)}
+                                            </div>
+
+                                            <div>
+                                                <h4 className="font-bold text-foreground text-lg">
+                                                    {TESTIMONIALS[currentIndex].name}
+                                                </h4>
+                                                <p className="text-sm text-muted-foreground">
+                                                    {TESTIMONIALS[currentIndex].location}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col items-end gap-2">
+                                            <Badge className="backdrop-blur-[2px] bg-[var(--color-brand-green)]/20 dark:bg-[var(--color-brand-green)]/30 text-[var(--color-brand-green)] border border-[var(--color-brand-green)]/30">
+                                                ✓ {TESTIMONIALS[currentIndex].highlight}
+                                            </Badge>
+                                            <p className="text-xs text-muted-foreground">
+                                                {TESTIMONIALS[currentIndex].months}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+
+                            {/* Navigation buttons */}
+                            <div className="absolute bottom-4 right-4 flex gap-2 z-10">
+                                <motion.button
+                                    onClick={prevTestimonial}
+                                    className="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-all border-border"
+                                    aria-label="Depoimento anterior"
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    animate={{
+                                        opacity: isDragging && dragOffset > 20 ? 1 : 0.7
+                                    }}
+                                >
+                                    <ChevronLeft className="w-5 h-5 text-foreground" />
+                                </motion.button>
+                                <motion.button
+                                    onClick={nextTestimonial}
+                                    className="w-10 h-10 rounded-full glass flex items-center justify-center hover:scale-110 transition-all border-border"
+                                    aria-label="Próximo depoimento"
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    animate={{
+                                        opacity: isDragging && dragOffset < -20 ? 1 : 0.7
+                                    }}
+                                >
+                                    <ChevronRight className="w-5 h-5 text-foreground" />
+                                </motion.button>
+                            </div>
+                        </Card>
+                    </motion.div>
 
                     {/* Dots */}
                     <div className="flex justify-center gap-2 mt-6">
                         {TESTIMONIALS.map((_, index) => (
-                            <button
+                            <motion.button
                                 key={index}
                                 onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-all ${
-                                    index === currentIndex ? 'w-8 bg-primary-600' : 'bg-gray-300'
+                                className={`h-2 rounded-full transition-all ${
+                                    index === currentIndex
+                                        ? 'w-8 bg-[var(--color-brand-green)]'
+                                        : 'w-2 bg-muted'
                                 }`}
                                 aria-label={`Ver depoimento ${index + 1}`}
+                                animate={{
+                                    scale: index === currentIndex ? [1, 1.2, 1] : 1
+                                }}
+                                transition={{ duration: 0.3 }}
                             />
                         ))}
                     </div>

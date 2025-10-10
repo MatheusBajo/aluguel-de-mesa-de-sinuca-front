@@ -1,6 +1,7 @@
+// src/components/sections/Storytelling.tsx
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -38,6 +39,15 @@ export function Storytelling() {
     const ctaDesc2Ref = useRef<HTMLParagraphElement>(null);
     const ctaIconRef = useRef<HTMLDivElement>(null);
     const ctaButtonRef = useRef<HTMLButtonElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detectar mobile
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -73,25 +83,45 @@ export function Storytelling() {
                         charsClass: 'char-title'
                     });
 
-                    gsap.set(splitTitle.chars, {
-                        opacity: 0,
-                        x: -20,
-                        filter: 'blur(10px)'
-                    });
+                    if (isMobile) {
+                        // Mobile: só opacity
+                        gsap.set(splitTitle.chars, {
+                            opacity: 0
+                        });
 
-                    gsap.to(splitTitle.chars, {
-                        opacity: index === 2 ? 0.7 : 0.6,
-                        x: 0,
-                        filter: 'blur(0px)',
-                        duration: 0.8,
-                        stagger: 0.02,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'bottom 95%',
-                            toggleActions: 'play none none reverse',
-                        }
-                    });
+                        gsap.to(splitTitle.chars, {
+                            opacity: 1,
+                            duration: 0.6,
+                            stagger: 0.02,
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'bottom 95%',
+                                toggleActions: 'play none none reverse',
+                            }
+                        });
+                    } else {
+                        // Desktop: opacity + blur + movement
+                        gsap.set(splitTitle.chars, {
+                            opacity: 0,
+                            x: -20,
+                            filter: 'blur(10px)'
+                        });
+
+                        gsap.to(splitTitle.chars, {
+                            opacity: 1,
+                            x: 0,
+                            filter: 'blur(0px)',
+                            duration: 0.8,
+                            stagger: 0.02,
+                            ease: 'power3.out',
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'bottom 95%',
+                                toggleActions: 'play none none reverse',
+                            }
+                        });
+                    }
                 }
             });
 
@@ -147,25 +177,47 @@ export function Storytelling() {
                         charsClass: 'char-cta-title'
                     });
 
-                    gsap.set(splitCtaTitle.chars, {
-                        opacity: 0,
-                        y: 50,
-                        scale: 0.8
-                    });
+                    if (isMobile) {
+                        // Mobile: só opacity e scale
+                        gsap.set(splitCtaTitle.chars, {
+                            opacity: 0,
+                            scale: 0.8
+                        });
 
-                    gsap.to(splitCtaTitle.chars, {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.6,
-                        stagger: 0.03,
-                        ease: 'back.out(1.4)',
-                        scrollTrigger: {
-                            trigger: ctaCard,
-                            start: 'top 70%',
-                            toggleActions: 'play none none none',
-                        }
-                    });
+                        gsap.to(splitCtaTitle.chars, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.6,
+                            stagger: 0.03,
+                            ease: 'power2.out',
+                            scrollTrigger: {
+                                trigger: ctaCard,
+                                start: 'top 70%',
+                                toggleActions: 'play none none none',
+                            }
+                        });
+                    } else {
+                        // Desktop: com blur e movimento
+                        gsap.set(splitCtaTitle.chars, {
+                            opacity: 0,
+                            y: 50,
+                            scale: 0.8
+                        });
+
+                        gsap.to(splitCtaTitle.chars, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            duration: 0.6,
+                            stagger: 0.03,
+                            ease: 'back.out(1.4)',
+                            scrollTrigger: {
+                                trigger: ctaCard,
+                                start: 'top 70%',
+                                toggleActions: 'play none none none',
+                            }
+                        });
+                    }
                 }
 
                 // Animar primeira linha da descrição
@@ -243,27 +295,47 @@ export function Storytelling() {
                     charsClass: 'char-main'
                 });
 
-                gsap.set(splitMainTitle.chars, {
-                    opacity: 0,
-                    x: -40,
-                    rotateY: -30,
-                    filter: 'blur(20px)'
-                });
+                if (isMobile) {
+                    // Mobile: só opacity
+                    gsap.set(splitMainTitle.chars, {
+                        opacity: 0
+                    });
 
-                gsap.to(splitMainTitle.chars, {
-                    opacity: 1,
-                    x: 0,
-                    rotateY: 0,
-                    filter: 'blur(0px)',
-                    duration: 1.2,
-                    stagger: 0.02,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: mainTitle,
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse',
-                    }
-                });
+                    gsap.to(splitMainTitle.chars, {
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.02,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: mainTitle,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse',
+                        }
+                    });
+                } else {
+                    // Desktop: com blur e movimento
+                    gsap.set(splitMainTitle.chars, {
+                        opacity: 0,
+                        x: -40,
+                        rotateY: -30,
+                        filter: 'blur(20px)'
+                    });
+
+                    gsap.to(splitMainTitle.chars, {
+                        opacity: 1,
+                        x: 0,
+                        rotateY: 0,
+                        filter: 'blur(0px)',
+                        duration: 1.2,
+                        stagger: 0.02,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: mainTitle,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse',
+                        }
+                    });
+                }
             }
 
             // Animar subtítulo da seção
@@ -274,46 +346,67 @@ export function Storytelling() {
                     wordsClass: 'word-subtitle'
                 });
 
-                gsap.set(splitMainSubtitle.words, {
-                    opacity: 0,
-                    y: 20,
-                    filter: 'blur(5px)'
-                });
+                if (isMobile) {
+                    // Mobile: só opacity
+                    gsap.set(splitMainSubtitle.words, {
+                        opacity: 0
+                    });
 
-                gsap.to(splitMainSubtitle.words, {
-                    opacity: 1,
-                    y: 0,
-                    filter: 'blur(0px)',
-                    duration: 0.8,
-                    stagger: 0.03,
-                    delay: 0.3,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: mainSubtitle,
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse',
-                    }
-                });
+                    gsap.to(splitMainSubtitle.words, {
+                        opacity: 1,
+                        duration: 0.6,
+                        stagger: 0.03,
+                        delay: 0.3,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: mainSubtitle,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse',
+                        }
+                    });
+                } else {
+                    // Desktop: com blur e movimento
+                    gsap.set(splitMainSubtitle.words, {
+                        opacity: 0,
+                        y: 20,
+                        filter: 'blur(5px)'
+                    });
+
+                    gsap.to(splitMainSubtitle.words, {
+                        opacity: 1,
+                        y: 0,
+                        filter: 'blur(0px)',
+                        duration: 0.8,
+                        stagger: 0.03,
+                        delay: 0.3,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: mainSubtitle,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse',
+                        }
+                    });
+                }
             }
 
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [isMobile]);
 
     return (
         <section
             id="momentos"
             ref={sectionRef}
-            className="py-16 md:py-24 lg:py-40 bg-gradient-to-b from-white via-gray-50 to-white"
+            className="py-16 md:py-24 lg:py-40 bg-gradient-to-b from-background via-muted/30 to-background"
         >
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-20 max-w-4xl mx-auto">
-                    <h2 className="main-title text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-8">
+                    <h2 className="main-title text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-4 md:mb-8">
                         A Transformação
                     </h2>
-                    <p className="main-subtitle text-xl md:text-2xl text-gray-600">
+                    <p className="main-subtitle text-xl md:text-2xl text-muted-foreground">
                         Veja o antes e depois de adicionar uma mesa na sua casa
                     </p>
                 </div>
@@ -328,7 +421,7 @@ export function Storytelling() {
                             }}
                             className="relative"
                         >
-                            {/* Card com imagem */}
+                            {/* Card com imagem e glassmorphism no overlay */}
                             <div className="relative aspect-[16/9] md:aspect-video rounded-xl md:rounded-3xl overflow-hidden shadow-xl md:shadow-2xl">
                                 <Image
                                     src={scene.image}
@@ -337,24 +430,20 @@ export function Storytelling() {
                                     className="object-cover"
                                 />
 
-                                {/* Overlay gradiente */}
-                                <div className={`absolute inset-0 bg-gradient-to-t ${
+                                {/* Overlay gradiente com glassmorphism */}
+                                <div className={`absolute inset-0 ${
                                     index === 2
-                                        ? 'from-white/20 to-transparent'
-                                        : 'from-black/30 via-black/20 to-transparent md:from-black/30 md:via-black/10'
+                                        ? 'bg-gradient-to-t from-black/40 to-transparent'
+                                        : 'bg-gradient-to-t from-black/50 via-black/20 to-transparent'
                                 }`} />
 
-                                {/* Texto */}
+                                {/* Texto sempre branco sem blur */}
                                 <div className="absolute text-center tracking-tight bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16">
                                     <h3
                                         ref={(el) => {
                                             titleRefs.current[index] = el;
                                         }}
-                                        className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold ${
-                                            index === 2
-                                                ? 'text-white drop-shadow-2xl'
-                                                : 'text-white/90 drop-shadow-lg'
-                                        }`}
+                                        className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl"
                                     >
                                         {scene.title}
                                     </h3>
@@ -363,10 +452,10 @@ export function Storytelling() {
                         </div>
                     ))}
 
-                    {/* CTA Final */}
+                    {/* CTA Final com glassmorphism */}
                     <div className="cta-card mt-20 md:mt-32 lg:mt-40 relative">
-                        {/* Background decorativo */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30 rounded-3xl -z-10" />
+                        {/* Background decorativo glassmorphism */}
+                        <div className="absolute inset-0 glass-gradient rounded-3xl -z-10 border-border" />
 
                         <div className="text-center py-16 md:py-24 px-6 md:px-12">
                             {/* Ícone */}
@@ -379,7 +468,7 @@ export function Storytelling() {
 
                             <h2
                                 ref={ctaTitleRef}
-                                className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 md:mb-12 text-gray-900"
+                                className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 md:mb-12 text-foreground"
                             >
                                 É isso que você aluga!
                             </h2>
@@ -387,22 +476,23 @@ export function Storytelling() {
                             <div className="space-y-4 md:space-y-6 max-w-4xl mx-auto">
                                 <p
                                     ref={ctaDesc1Ref}
-                                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-emerald-600"
+                                    className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-brand-green)]"
                                 >
                                     Não é só uma mesa.
                                 </p>
                                 <p
                                     ref={ctaDesc2Ref}
-                                    className="text-xl md:text-2xl lg:text-3xl text-gray-700 leading-relaxed font-light"
+                                    className="text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed font-light"
                                 >
                                     É tradição, conexão e memórias que sua família vai lembrar pra sempre.
                                 </p>
                             </div>
 
-                            {/* CTA Button */}
+                            {/* CTA Button com glassmorphism no hover */}
                             <button
                                 ref={ctaButtonRef}
-                                className="mt-12 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-full transition-colors shadow-lg hover:shadow-xl"
+                                onClick={() => window.open(`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`, '_blank')}
+                                className="mt-12 px-8 py-4 bg-[var(--color-brand-green)] hover:bg-[#047857] text-white text-lg font-semibold rounded-full transition-all shadow-lg hover:shadow-xl hover:scale-105"
                             >
                                 Quero alugar agora
                             </button>

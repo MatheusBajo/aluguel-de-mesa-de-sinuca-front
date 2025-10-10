@@ -41,6 +41,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Cores customizadas do projeto */
+  --color-brand-green: #059669;
+  --color-brand-yellow: #fbbf24;
 }
 
 :root {
@@ -76,6 +80,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Glassmorphism light mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-gradient-start: rgba(0, 0, 0, 0.05);
+  --glass-gradient-end: transparent;
 }
 
 .dark {
@@ -110,6 +120,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Glassmorphism dark mode */
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-gradient-start: rgba(255, 255, 255, 0.1);
+  --glass-gradient-end: transparent;
 }
 
 @layer base {
@@ -119,50 +135,27 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden;
   }
-
   html {
     @apply overflow-x-hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-@import "tailwindcss";
-
-/* Tailwind CSS 4 usa @theme ao invés de @layer base para variáveis CSS */
-@theme {
-  /* Cores customizadas do tema */
-  --color-primary-50: #eff6ff;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-900: #1e3a8a;
-
-  --color-accent-50: #fff7ed;
-  --color-accent-500: #f97316;
-  --color-accent-600: #ea580c;
-  --color-accent-700: #c2410c;
-
-  --color-success: #22c55e;
+/* Utility classes para glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background: white;
-  color: rgb(17 24 39);
-  line-height: 1.6;
-}
-
-/* Correção para gradientes de texto no Tailwind CSS 4 */
-.text-gradient {
-  background: linear-gradient(to right, #3b82f6, #f97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.glass-gradient {
+  background: linear-gradient(to bottom, var(--glass-gradient-start), var(--glass-gradient-end));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
 }
 
 /* Animações customizadas */
@@ -175,7 +168,6 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Componente WhatsApp pulse */
 .whatsapp-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -184,4 +176,3 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
-

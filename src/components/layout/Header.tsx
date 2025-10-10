@@ -4,13 +4,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
     const logoPath = process.env.NEXT_PUBLIC_LOGO_PATH || '/images/logo/logo-01.png';
 
@@ -21,6 +22,19 @@ export function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Detectar tema do sistema
+    useEffect(() => {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(isDark ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', isDark);
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    };
 
     const navItems = [
         { href: '#como-funciona', label: 'Como Funciona' },
@@ -33,11 +47,13 @@ export function Header() {
     return (
         <header className={cn(
             'fixed top-0 left-0 right-0 z-40 transition-all',
-            isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+            isScrolled
+                ? 'glass shadow-lg'
+                : 'bg-transparent'
         )}>
             <div className="container mx-auto px-4">
                 <nav className="flex items-center justify-between h-20">
-                    {/* Logo + Texto */}
+                    {/* Logo */}
                     <Link href="/" className="flex items-center gap-3">
                         <Image
                             src={logoPath}
@@ -46,13 +62,16 @@ export function Header() {
                             height={60}
                             className={cn(
                                 "h-12 w-auto transition-all",
-                                !isScrolled && "invert brightness-0"
+                                !isScrolled && "brightness-0 invert",
+                                theme === 'dark' && isScrolled && "brightness-0 invert"
                             )}
                             priority
                         />
                         <span className={cn(
                             "font-display font-bold text-lg transition-colors hidden sm:block",
-                            isScrolled ? "text-gray-900" : "text-white"
+                            isScrolled
+                                ? "text-foreground"
+                                : "text-white"
                         )}>
                             Aluguel de Mesa de Sinuca
                         </span>
@@ -65,8 +84,10 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    "hover:text-primary-600 transition-colors font-medium",
-                                    isScrolled ? "text-gray-900" : "text-white"
+                                    "hover:text-[var(--color-brand-green)] transition-colors font-medium",
+                                    isScrolled
+                                        ? "text-foreground"
+                                        : "text-white"
                                 )}
                             >
                                 {item.label}
@@ -74,8 +95,31 @@ export function Header() {
                         ))}
                     </div>
 
-                    {/* CTA - WhatsApp icon */}
-                    <div className="hidden lg:flex items-center">
+                    {/* Theme + WhatsApp */}
+                    <div className="hidden lg:flex items-center gap-3">
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={toggleTheme}
+                            className={cn(
+                                "p-2 rounded-lg transition-all hover:scale-110 glass",
+                                isScrolled ? "" : "bg-white/10"
+                            )}
+                            aria-label="Trocar tema"
+                        >
+                            {theme === 'light' ? (
+                                <Moon className={cn(
+                                    "w-5 h-5",
+                                    isScrolled ? "text-foreground" : "text-white"
+                                )} />
+                            ) : (
+                                <Sun className={cn(
+                                    "w-5 h-5",
+                                    isScrolled ? "text-foreground" : "text-white"
+                                )} />
+                            )}
+                        </button>
+
+                        {/* WhatsApp */}
                         <button
                             onClick={() => window.open(`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`, '_blank')}
                             className="hover:scale-110 transition-transform p-2"
@@ -99,7 +143,7 @@ export function Header() {
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className={cn(
                             "lg:hidden p-2",
-                            isScrolled ? "text-gray-900" : "text-white"
+                            isScrolled ? "text-foreground" : "text-white"
                         )}
                         aria-label="Menu"
                     >
@@ -109,20 +153,31 @@ export function Header() {
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
-                    <div className="lg:hidden absolute top-20 left-0 right-0 bg-white border-t shadow-xl">
+                    <div className="lg:hidden absolute top-20 left-0 right-0 glass border-t shadow-xl">
                         <div className="flex flex-col p-4 space-y-4">
                             {navItems.map((item) => (
                                 <a
                                     key={item.href}
                                     href={item.href}
-                                    className="text-gray-700 hover:text-primary-600 transition-colors font-medium py-2"
+                                    className="text-foreground hover:text-[var(--color-brand-green)] transition-colors font-medium py-2"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {item.label}
                                 </a>
                             ))}
-                            <div className="pt-4 border-t">
-                                <WhatsAppButton variant="hero" type="pf" className="w-full justify-center">
+                            <div className="pt-4 border-t border-border flex items-center gap-3">
+                                <button
+                                    onClick={toggleTheme}
+                                    className="p-2 rounded-lg glass hover:scale-110 transition-all"
+                                    aria-label="Trocar tema"
+                                >
+                                    {theme === 'light' ? (
+                                        <Moon className="w-5 h-5 text-foreground" />
+                                    ) : (
+                                        <Sun className="w-5 h-5 text-foreground" />
+                                    )}
+                                </button>
+                                <WhatsAppButton variant="hero" type="pf" className="flex-1 justify-center">
                                     Solicitar Orçamento
                                 </WhatsAppButton>
                             </div>
