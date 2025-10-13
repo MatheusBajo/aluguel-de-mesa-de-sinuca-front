@@ -3,9 +3,10 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { TESTIMONIALS } from '@/lib/site-config';
 
 export function Testimonials() {
@@ -23,7 +24,7 @@ export function Testimonials() {
         setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
     };
 
-    // Swipe handlers
+    // Swipe handlers para mobile
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStart(e.targetTouches[0].clientX);
         setIsDragging(true);
@@ -79,10 +80,10 @@ export function Testimonials() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                        O Que Nossos <span className="text-[var(--color-brand-green)]">Clientes</span> Falam
+                        Quem Alugou <span className="text-[var(--color-brand-green)]">Conta</span>
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Depoimentos reais de quem alugou e não se arrepende
+                        Depoimentos reais de quem transformou a casa em point
                     </p>
                 </motion.div>
 
@@ -114,17 +115,13 @@ export function Testimonials() {
                                     className="p-8 md:p-12"
                                 >
                                     {/* Quote icon */}
-                                    <div className="flex items-start gap-4 mb-6">
+                                    <div className="flex items-center justify-between mb-6">
                                         <div className="p-3 rounded-full bg-[var(--color-brand-green)]/10">
                                             <Quote className="w-8 h-8 text-[var(--color-brand-green)]" />
                                         </div>
-
-                                        {/* Stars */}
-                                        <div className="flex gap-1">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Star key={i} className="w-5 h-5 fill-[var(--color-brand-yellow)] text-[var(--color-brand-yellow)]" />
-                                            ))}
-                                        </div>
+                                        <Badge className="backdrop-blur-[2px] bg-[var(--color-brand-green)]/20 dark:bg-[var(--color-brand-green)]/30 text-[var(--color-brand-green)] border border-[var(--color-brand-green)]/30">
+                                            ✓ {TESTIMONIALS[currentIndex].highlight}
+                                        </Badge>
                                     </div>
 
                                     {/* Text */}
@@ -145,19 +142,14 @@ export function Testimonials() {
                                                     {TESTIMONIALS[currentIndex].name}
                                                 </h4>
                                                 <p className="text-sm text-muted-foreground">
-                                                    {TESTIMONIALS[currentIndex].location}
+                                                    {TESTIMONIALS[currentIndex].role} • {TESTIMONIALS[currentIndex].location}
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col items-end gap-2">
-                                            <Badge className="backdrop-blur-[2px] bg-[var(--color-brand-green)]/20 dark:bg-[var(--color-brand-green)]/30 text-[var(--color-brand-green)] border border-[var(--color-brand-green)]/30">
-                                                ✓ {TESTIMONIALS[currentIndex].highlight}
-                                            </Badge>
-                                            <p className="text-xs text-muted-foreground">
-                                                {TESTIMONIALS[currentIndex].months}
-                                            </p>
-                                        </div>
+                                        <p className="text-xs text-muted-foreground">
+                                            {TESTIMONIALS[currentIndex].months}
+                                        </p>
                                     </div>
                                 </motion.div>
                             </AnimatePresence>
@@ -212,6 +204,25 @@ export function Testimonials() {
                         ))}
                     </div>
                 </div>
+
+                {/* CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                >
+                    <p className="text-muted-foreground mb-6">
+                        Junte-se a mais de <strong className="text-foreground">247 clientes</strong> que já alugaram
+                    </p>
+                    <WhatsAppButton
+                        variant="hero"
+                        type="pf"
+                        className="bg-[var(--color-brand-green)] hover:bg-[#047857]"
+                    >
+                        Quero Alugar Também
+                    </WhatsAppButton>
+                </motion.div>
             </div>
         </section>
     );
