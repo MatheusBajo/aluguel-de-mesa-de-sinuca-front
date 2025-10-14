@@ -193,15 +193,15 @@ export function Hero() {
             {/* Background */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/mesa-de-sinuca-light.png"
+                    src="/images/produtos/mesa-de-sinuca-padrao/16x9-mesa-de-sinuca-background-02.jpeg"
                     alt="Mesa de sinuca"
                     fill
-                    className="object-cover"
+                    className="object-cover saturate-120 brightness-50"
                     priority
                     quality={90}
                 />
-                <div className="absolute inset-0 bg-black/60" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                {/*<div className="absolute inset-0 bg-black/40" />*/}
+                {/*<div className="absolute inset-0 bg-gradient-to-t from-black/0 to-transparent" />*/}
             </div>
 
             {/* Content */}

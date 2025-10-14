@@ -8,13 +8,17 @@ import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
 import { CTA } from '@/components/sections/CTA';
 import { Header } from '@/components/layout/Header';
+import { HeroHeader } from '@/components/layout/HeroHeader';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 
 export default function Home() {
     return (
         <>
+
+            {/* Header principal que aparece ao scrollar */}
             <Header />
+
             <main className="min-h-screen">
                 {/* 1. Hero emocional com GSAP */}
                 <Hero />

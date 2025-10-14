@@ -10,24 +10,6 @@ import { Card } from "@/components/ui/card";
 
 export function FAQ() {
     const faqs = {
-        pricing: [
-            {
-                question: 'Como funciona a divisão entre amigos?',
-                answer: 'Você junta a galera e divide do jeito que quiserem. R$ 250 ÷ 4 = R$ 62,50 cada. A gente não se mete em como vocês organizam isso. Só queremos saber quem é o responsável pelo contrato.'
-            },
-            {
-                question: 'E se meus amigos desistirem no meio?',
-                answer: 'Você pode continuar sozinho, encontrar outros amigos pra dividir, ou cancelar avisando 30 dias antes. Sem multa, sem burocracia. A vida muda, a gente entende.'
-            },
-            {
-                question: 'Tem que pagar tudo de uma vez?',
-                answer: 'Não. Você paga por mês. Primeiro pagamento na contratação, depois mensalmente. Sem entrada alta, sem parcelamento no cartão cheio de juros.'
-            },
-            {
-                question: 'Quanto custa a entrega?',
-                answer: 'Taxa única de entrega + montagem que varia por região (geralmente R$ 150-250). É pago uma vez só. Quando você cancelar, a retirada já tá inclusa nessa taxa.'
-            }
-        ],
         service: [
             {
                 question: 'A mesa é nova ou usada?',
@@ -63,13 +45,31 @@ export function FAQ() {
                 question: 'Quanto espaço preciso?',
                 answer: 'Ideal: 4m x 3m (1,5m livre de cada lado para jogar confortável). Mas nos adaptamos. Se o espaço for apertado, recomendamos a mesa menor ou mostramos como funciona antes de instalar.'
             }
+        ],
+        pricing: [
+            {
+                question: 'Como funciona a divisão entre amigos?',
+                answer: 'Você junta a galera e divide do jeito que quiserem. R$ 250 ÷ 4 = R$ 62,50 cada. A gente não se mete em como vocês organizam isso. Só queremos saber quem é o responsável pelo contrato.'
+            },
+            {
+                question: 'E se meus amigos desistirem no meio?',
+                answer: 'Você pode continuar sozinho, encontrar outros amigos pra dividir, ou cancelar avisando 30 dias antes. Sem multa, sem burocracia. A vida muda, a gente entende.'
+            },
+            {
+                question: 'Tem que pagar tudo de uma vez?',
+                answer: 'Não. Você paga por mês. Primeiro pagamento na contratação, depois mensalmente. Sem entrada alta, sem parcelamento no cartão cheio de juros.'
+            },
+            {
+                question: 'Quanto custa a entrega?',
+                answer: 'Taxa única de entrega + montagem que varia por região (geralmente R$ 150-250). É pago uma vez só. Quando você cancelar, a retirada já tá inclusa nessa taxa.'
+            }
         ]
     };
 
     const categories = [
-        { id: 'pricing', label: 'Dinheiro e Divisão' },
         { id: 'service', label: 'Como Funciona' },
-        { id: 'delivery', label: 'Entrega e Espaço' }
+        { id: 'delivery', label: 'Entrega e Espaço' },
+        { id: 'pricing', label: 'Dinheiro e Divisão' }
     ];
 
     return (
