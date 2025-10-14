@@ -2,7 +2,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { ChevronDown } from 'lucide-react';
@@ -55,6 +54,7 @@ export function Hero() {
     const subheadRef = useRef<HTMLParagraphElement>(null);
     const ctaRef = useRef<HTMLDivElement>(null);
     const badgeRef = useRef<HTMLDivElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -64,6 +64,15 @@ export function Hero() {
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Garantir que o vídeo toca automaticamente
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(err => {
+                console.log('Autoplay prevented:', err);
+            });
+        }
     }, []);
 
     useEffect(() => {
@@ -124,7 +133,6 @@ export function Hero() {
                 const tl = gsap.timeline({
                     onComplete: () => {
                         gsap.delayedCall(ANIMATION_CONFIG.HEADLINE_DISPLAY_TIME / 1000, () => {
-                            // Fade out sem blur no mobile
                             gsap.to(headlineElement, {
                                 opacity: 0,
                                 duration: ANIMATION_CONFIG.TRANSITION_DURATION / 1000,
@@ -190,18 +198,27 @@ export function Hero() {
 
     return (
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
-            {/* Background */}
+            {/* Background Video */}
             <div className="absolute inset-0 z-0">
-                <Image
-                    src="/images/produtos/mesa-de-sinuca-padrao/16x9-mesa-de-sinuca-background-02.jpeg"
-                    alt="Mesa de sinuca"
-                    fill
-                    className="object-cover saturate-120 brightness-50"
-                    priority
-                    quality={90}
-                />
-                {/*<div className="absolute inset-0 bg-black/40" />*/}
-                {/*<div className="absolute inset-0 bg-gradient-to-t from-black/0 to-transparent" />*/}
+                <video
+                    ref={videoRef}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{
+                        filter: 'saturate(1.2) brightness(0.5)'
+                    }}
+                >
+                    <source
+                        src="/images/produtos/mesa-de-sinuca-padrao/video-mesa-de-sinuca.mp4"
+                        type="video/mp4"
+                    />
+                    {/* Fallback para caso o vídeo não carregue */}
+                    Seu navegador não suporta vídeos.
+                </video>
             </div>
 
             {/* Content */}

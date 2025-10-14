@@ -97,7 +97,7 @@ export function FAQ() {
                     viewport={{ once: true }}
                     className="max-w-3xl mx-auto"
                 >
-                    <Tabs defaultValue="pricing" className="w-full">
+                    <Tabs defaultValue="service" className="w-full">
                         <TabsList className="grid w-full grid-cols-3 mb-8 glass-gradient border-border">
                             {categories.map(category => (
                                 <TabsTrigger
