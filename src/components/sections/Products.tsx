@@ -4,80 +4,25 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Maximize2, Home } from 'lucide-react';
+import { Maximize2, Home } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { getEnabledProducts } from '@/lib/site-config';
 
 const productImages = [
-    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-01-frontal-mesa-de-sinuca.png', alt: 'Vista frontal', is9x16: false },
-    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-02-lateral-01-mesa-de-sinuca.png', alt: 'Vista lateral', is9x16: false },
-    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-04-diagonal-45-mesa-de-sinuca.png', alt: 'Vista diagonal', is9x16: false }
+    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-01-frontal-mesa-de-sinuca.png', alt: 'Vista frontal' },
+    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-02-lateral-01-mesa-de-sinuca.png', alt: 'Vista lateral' },
+    { src: '/images/produtos/mesa-de-sinuca-padrao/16x09-04-diagonal-45-mesa-de-sinuca.png', alt: 'Vista diagonal' }
 ];
 
 export function Products() {
     const products = getEnabledProducts();
     const [currentImage, setCurrentImage] = useState(0);
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragOffset, setDragOffset] = useState(0);
 
     if (products.length === 0) return null;
 
     const currentProduct = products[0];
-    const currentImg = productImages[currentImage];
-
-    const nextImage = () => setCurrentImage((prev) => (prev + 1) % productImages.length);
-    const prevImage = () => setCurrentImage((prev) => (prev - 1 + productImages.length) % productImages.length);
-
-    // Swipe handlers para mobile
-    const handleTouchStart = (e: React.TouchEvent) => {
-        setTouchStart(e.targetTouches[0].clientX);
-        setIsDragging(true);
-    };
-
-    const handleTouchMove = (e: React.TouchEvent) => {
-        const currentTouch = e.targetTouches[0].clientX;
-        setTouchEnd(currentTouch);
-
-        // Calcula offset do arrasto com resistance nas bordas
-        let offset = currentTouch - touchStart;
-
-        // Adiciona resistência quando tenta arrastar além dos limites
-        if ((currentImage === 0 && offset > 0) ||
-            (currentImage === productImages.length - 1 && offset < 0)) {
-            offset = offset * 0.3; // 30% de resistência
-        }
-
-        setDragOffset(offset);
-    };
-
-    const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) {
-            setIsDragging(false);
-            setDragOffset(0);
-            return;
-        }
-
-        const distance = touchStart - touchEnd;
-        const threshold = 75;
-
-        if (Math.abs(distance) > threshold) {
-            if (distance > 0) {
-                nextImage();
-            } else {
-                prevImage();
-            }
-        }
-
-        // Reset
-        setIsDragging(false);
-        setDragOffset(0);
-        setTouchStart(0);
-        setTouchEnd(0);
-    };
 
     return (
         <section id="mesas" className="py-20 bg-background">
@@ -98,113 +43,77 @@ export function Products() {
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
-                    {/* Carrossel */}
+                    {/* Galeria com Thumbnails */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         className="relative"
                     >
-                        <div className="glass relative rounded-2xl overflow-hidden shadow-xl">
-                            {/* Container com animação de arrasto */}
-                            <motion.div
-                                className="aspect-video relative cursor-grab active:cursor-grabbing select-none"
-                                onTouchStart={handleTouchStart}
-                                onTouchMove={handleTouchMove}
-                                onTouchEnd={handleTouchEnd}
-                                animate={{
-                                    x: isDragging ? dragOffset * 0.8 : 0, // Arrasto suavizado
-                                    scale: isDragging ? 0.98 : 1, // Scale leve ao arrastar
-                                }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 300,
-                                    damping: 30
-                                }}
-                            >
-                                {/* AnimatePresence para transição suave entre imagens */}
-                                <AnimatePresence mode="wait" initial={false}>
+                        {/* Imagem Principal */}
+                        <div className="glass relative rounded-2xl overflow-hidden shadow-xl mb-4">
+                            <div className="aspect-video relative">
+                                <AnimatePresence mode="wait">
                                     <motion.div
                                         key={currentImage}
-                                        initial={{ opacity: 0, x: 100 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -100 }}
-                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3 }}
                                         className="absolute inset-0"
                                     >
-                                        {currentImg.is9x16 && (
-                                            <div className="absolute inset-0">
-                                                <Image
-                                                    src={currentImg.src}
-                                                    alt="Background blur"
-                                                    fill
-                                                    className="object-cover blur-xl scale-110 opacity-50"
-                                                />
-                                            </div>
-                                        )}
                                         <Image
-                                            src={currentImg.src}
-                                            alt={currentImg.alt}
+                                            src={productImages[currentImage].src}
+                                            alt={productImages[currentImage].alt}
                                             fill
-                                            className={`relative z-10 ${currentImg.is9x16 ? 'object-contain' : 'object-cover'}`}
+                                            className="object-cover"
                                             priority={currentImage === 0}
                                         />
                                     </motion.div>
                                 </AnimatePresence>
 
-                                <Badge className="absolute top-4 left-4 bg-[var(--color-brand-green)] text-white z-20 border-0 backdrop-blur-md">
+                                <Badge className="absolute top-4 left-4 bg-[var(--color-brand-green)] text-white z-10 border-0 backdrop-blur-md">
                                     {currentProduct.badge}
                                 </Badge>
-                            </motion.div>
-
-                            {/* Navegação */}
-                            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-between px-4 z-20">
-                                <motion.button
-                                    onClick={prevImage}
-                                    className="w-12 h-12 rounded-full glass flex items-center justify-center shadow-lg hover:scale-110 transition-all"
-                                    aria-label="Imagem anterior"
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    animate={{
-                                        opacity: isDragging && dragOffset > 20 ? 1 : 0.7
-                                    }}
-                                >
-                                    <ChevronLeft className="w-6 h-6 text-foreground" />
-                                </motion.button>
-
-                                {/* Dots com animação */}
-                                <div className="flex gap-2">
-                                    {productImages.map((_, i) => (
-                                        <motion.button
-                                            key={i}
-                                            onClick={() => setCurrentImage(i)}
-                                            className={`h-2 rounded-full transition-all ${
-                                                i === currentImage
-                                                    ? 'w-8 bg-[var(--color-brand-green)]'
-                                                    : 'w-2 bg-muted'
-                                            }`}
-                                            aria-label={`Ver imagem ${i + 1}`}
-                                            animate={{
-                                                scale: i === currentImage ? [1, 1.2, 1] : 1
-                                            }}
-                                            transition={{ duration: 0.3 }}
-                                        />
-                                    ))}
-                                </div>
-
-                                <motion.button
-                                    onClick={nextImage}
-                                    className="w-12 h-12 rounded-full glass flex items-center justify-center shadow-lg hover:scale-110 transition-all"
-                                    aria-label="Próxima imagem"
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    animate={{
-                                        opacity: isDragging && dragOffset < -20 ? 1 : 0.7
-                                    }}
-                                >
-                                    <ChevronRight className="w-6 h-6 text-foreground" />
-                                </motion.button>
                             </div>
+                        </div>
+
+                        {/* Thumbnails */}
+                        <div className="grid grid-cols-3 gap-3">
+                            {productImages.map((img, idx) => (
+                                <motion.button
+                                    key={idx}
+                                    onClick={() => setCurrentImage(idx)}
+                                    className={`relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all ${
+                                        idx === currentImage
+                                            ? 'ring-4 ring-[var(--color-brand-green)] scale-105'
+                                            : 'ring-2 ring-muted hover:ring-muted-foreground/50'
+                                    }`}
+                                    whileHover={{ scale: idx === currentImage ? 1.05 : 1.03 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    <Image
+                                        src={img.src}
+                                        alt={img.alt}
+                                        fill
+                                        className={`object-cover transition-all ${
+                                            idx === currentImage ? '' : 'opacity-60 hover:opacity-100'
+                                        }`}
+                                    />
+
+                                    {/* Overlay quando não selecionado */}
+                                    {idx !== currentImage && (
+                                        <div className="absolute inset-0 bg-black/20" />
+                                    )}
+
+                                    {/* Label */}
+                                    <div className="absolute bottom-2 left-2 right-2">
+                                        <span className="text-xs font-medium text-white drop-shadow-lg">
+                                            {img.alt}
+                                        </span>
+                                    </div>
+                                </motion.button>
+                            ))}
                         </div>
                     </motion.div>
 
