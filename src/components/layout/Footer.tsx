@@ -1,7 +1,7 @@
 // src/components/layout/Footer.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -11,7 +11,6 @@ export function Footer() {
     const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Aluguel de Mesa de Sinuca';
     const phone = process.env.NEXT_PUBLIC_PHONE || '5511999999999';
     const email = process.env.NEXT_PUBLIC_EMAIL || 'contato@alugueldemesadesinuca.com.br';
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alugueldemesadesinuca.vercel.app';
 
     // Formata telefone pra exibição
     const phoneFormatted = phone.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, '+$1 ($2) $3-$4');
@@ -35,6 +34,7 @@ export function Footer() {
                             Líder em locação de mesas de sinuca em São Paulo.
                             Qualidade profissional, preço justo.
                         </p>
+                        {/* Social Links - DESABILITADO
                         <div className="flex gap-4">
                             <a href="#" className="text-gray-400 hover:text-white transition-colors">
                                 <Instagram className="w-5 h-5" />
@@ -43,6 +43,7 @@ export function Footer() {
                                 <Facebook className="w-5 h-5" />
                             </a>
                         </div>
+                        */}
                     </div>
 
                     {/* Quick Links */}

@@ -1,10 +1,10 @@
 // src/components/sections/Products.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, Home } from 'lucide-react';
+import { Maximize2, Home, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
@@ -19,6 +19,42 @@ const productImages = [
 export function Products() {
     const products = getEnabledProducts();
     const [currentImage, setCurrentImage] = useState(0);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+    // Gerenciar histórico do navegador pra fechar lightbox com botão voltar
+    useEffect(() => {
+        if (isLightboxOpen) {
+            // Adiciona estado no histórico
+            window.history.pushState({ lightbox: true }, '');
+
+            const handlePopState = () => {
+                setIsLightboxOpen(false);
+            };
+
+            window.addEventListener('popstate', handlePopState);
+
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+            };
+        }
+    }, [isLightboxOpen]);
+
+    // Prevenir scroll quando lightbox aberto
+    useEffect(() => {
+        if (isLightboxOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [isLightboxOpen]);
+
+    const closeLightbox = () => {
+        if (window.history.state?.lightbox) {
+            window.history.back();
+        } else {
+            setIsLightboxOpen(false);
+        }
+    };
 
     if (products.length === 0) return null;
 
@@ -52,7 +88,10 @@ export function Products() {
                     >
                         {/* Imagem Principal */}
                         <div className="glass relative rounded-2xl overflow-hidden shadow-xl mb-4">
-                            <div className="aspect-video relative">
+                            <button
+                                onClick={() => setIsLightboxOpen(true)}
+                                className="aspect-video relative w-full cursor-zoom-in group"
+                            >
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={currentImage}
@@ -66,7 +105,7 @@ export function Products() {
                                             src={productImages[currentImage].src}
                                             alt={productImages[currentImage].alt}
                                             fill
-                                            className="object-cover"
+                                            className="object-cover transition-transform group-hover:scale-105"
                                             priority={currentImage === 0}
                                         />
                                     </motion.div>
@@ -75,7 +114,17 @@ export function Products() {
                                 <Badge className="absolute top-4 left-4 bg-[var(--color-brand-green)] text-white z-10 border-0 backdrop-blur-md">
                                     {currentProduct.badge}
                                 </Badge>
-                            </div>
+
+                                {/* Badge de Preço - Menor */}
+                                <Badge className="absolute top-4 right-4 bg-gradient-to-br from-purple-500 to-pink-500 text-white z-10 border-0 backdrop-blur-md text-sm font-bold px-3 py-1.5">
+                                    R$ 250/mês
+                                </Badge>
+
+                                {/* Hint de zoom */}
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                    <Maximize2 className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </div>
+                            </button>
                         </div>
 
                         {/* Thumbnails */}
@@ -190,7 +239,7 @@ export function Products() {
                                         <span className="text-lg font-normal text-muted-foreground">/mês</span>
                                     </p>
                                     <p className="text-sm text-muted-foreground mt-2">
-                                        Contrato mínimo 6 meses
+                                        Contratos de até 6 meses
                                     </p>
                                 </div>
                             </div>
@@ -206,6 +255,50 @@ export function Products() {
                         </WhatsAppButton>
                     </motion.div>
                 </div>
+
+                {/* Lightbox Modal */}
+                <AnimatePresence>
+                    {isLightboxOpen && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+                            onClick={closeLightbox}
+                        >
+                            {/* Botão fechar */}
+                            <button
+                                onClick={closeLightbox}
+                                className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-colors z-10"
+                                aria-label="Fechar"
+                            >
+                                <X className="w-6 h-6 text-white" />
+                            </button>
+
+                            {/* Imagem */}
+                            <motion.div
+                                initial={{ scale: 0.9 }}
+                                animate={{ scale: 1 }}
+                                exit={{ scale: 0.9 }}
+                                className="relative w-full h-full max-w-6xl max-h-[90vh]"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <Image
+                                    src={productImages[currentImage].src}
+                                    alt={productImages[currentImage].alt}
+                                    fill
+                                    className="object-contain"
+                                    quality={100}
+                                />
+                            </motion.div>
+
+                            {/* Label */}
+                            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-sm backdrop-blur-sm bg-black/50 px-4 py-2 rounded-full">
+                                {productImages[currentImage].alt}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
     );

@@ -8,6 +8,7 @@ import { HowItWorks } from '@/components/sections/HowItWorks';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
 import { CTA } from '@/components/sections/CTA';
+import { TopBanner } from '@/components/layout/TopBanner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
@@ -15,6 +16,9 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 export default function Home() {
     return (
         <>
+            {/* Barra preta no topo com texto scrolling */}
+            <TopBanner />
+
             {/* Header principal que aparece ao scrollar */}
             <Header />
 

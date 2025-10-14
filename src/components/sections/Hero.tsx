@@ -268,7 +268,7 @@ export function Hero() {
                             ✓ Entregamos e montamos
                         </Badge>
                         <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
-                            ✓ Contrato 6 meses
+                            ✓ Contratos de até 6 meses
                         </Badge>
                         <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
                             ✓ R$ 250/mês

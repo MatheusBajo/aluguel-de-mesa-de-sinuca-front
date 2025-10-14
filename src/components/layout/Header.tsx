@@ -47,7 +47,6 @@ export function Header() {
     }, []);
 
     // Logo: branco no topo, tema depois do scroll
-    // Logo: branco no topo, tema depois do scroll
     const logoPath = !isScrolled
         ? '/images/logo/logo-01-white.png'
         : theme === 'dark'
@@ -65,7 +64,8 @@ export function Header() {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 w-full isolate',
+                'fixed left-0 right-0 z-50 w-full isolate',
+                'top-9', // Espaço pra TopBanner (36px)
                 'transition-all duration-500 ease-out',
                 // Texto branco quando no topo (transparente)
                 !isScrolled && 'text-white'
