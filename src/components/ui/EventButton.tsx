@@ -11,7 +11,7 @@ interface EventButtonProps {
 export function EventButton({ className }: EventButtonProps) {
     return (
         <a
-            href="https://alugueldegames.com.br"
+            href="https://www.alugueldegames.com.br"
             target="_blank"
             rel="noopener noreferrer"
             className={cn(

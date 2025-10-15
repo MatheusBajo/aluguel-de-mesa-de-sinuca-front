@@ -24,7 +24,6 @@ export function Products() {
     // Gerenciar histórico do navegador pra fechar lightbox com botão voltar
     useEffect(() => {
         if (isLightboxOpen) {
-            // Adiciona estado no histórico
             window.history.pushState({ lightbox: true }, '');
 
             const handlePopState = () => {
@@ -68,7 +67,7 @@ export function Products() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-8"
                 >
                     <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
                         Nossa <span className="text-[var(--color-brand-green)]">Mesa</span>
@@ -76,6 +75,42 @@ export function Products() {
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                         Tamanho ideal pra maioria das casas. Profissional, revisada, pronta pra usar.
                     </p>
+                </motion.div>
+
+                {/* Banner Eventos */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-4xl mx-auto mb-16"
+                >
+                    <a
+                        href="https://www.alugueldegames.com.br"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block group"
+                    >
+                        <Card className="glass-gradient p-6 border-2 border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-600 transition-all hover:shadow-xl">
+                            <div className="flex items-center justify-between gap-4 flex-wrap">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-2xl flex-shrink-0">
+                                        🎉
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-foreground mb-1">
+                                            Procura para festa ou evento?
+                                        </h3>
+                                        <p className="text-sm text-muted-foreground">
+                                            Confraternizações, feiras, eventos corporativos
+                                        </p>
+                                    </div>
+                                </div>
+                                <Badge className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-700 group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-colors whitespace-nowrap">
+                                    Clique aqui →
+                                </Badge>
+                            </div>
+                        </Card>
+                    </a>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
@@ -240,6 +275,9 @@ export function Products() {
                                     </p>
                                     <p className="text-sm text-muted-foreground mt-2">
                                         Contratos de até 6 meses
+                                    </p>
+                                    <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">
+                                        + Taxa de frete e montagem/nivelamento no local
                                     </p>
                                 </div>
                             </div>

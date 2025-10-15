@@ -2,12 +2,12 @@
 'use client';
 
 export function TopBanner() {
-    const text = "🎉 Procura para festa ou evento? Clique aqui e conheça nosso serviço especializado!";
+    const text = "🎉 Quer alugar para festa/evento/feiras ou confraternização? Acesse: www.alugueldegames.com.br";
 
     return (
         <div className="fixed top-0 left-0 right-0 bg-black text-white py-2 overflow-hidden z-[60]">
             <a
-                href="https://alugueldegames.com.br"
+                href="https://www.alugueldegames.com.br"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:text-purple-300 transition-colors"

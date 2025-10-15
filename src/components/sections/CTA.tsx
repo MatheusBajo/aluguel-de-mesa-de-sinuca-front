@@ -40,7 +40,7 @@ export function CTA() {
                         {[
                             { icon: <Users className="w-5 h-5" />, text: 'R$ 62 dividindo por 4' },
                             { icon: <Shield className="w-5 h-5" />, text: 'Contrato 6 meses' },
-                            { icon: <ArrowRight className="w-5 h-5" />, text: 'Montagem inclusa' }
+                            { icon: <ArrowRight className="w-5 h-5" />, text: 'Manutenção inclusa' }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}

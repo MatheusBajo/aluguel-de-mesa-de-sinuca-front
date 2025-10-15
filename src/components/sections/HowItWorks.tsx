@@ -18,7 +18,7 @@ export function HowItWorks() {
         {
             number: '02',
             title: 'Entrega e Montagem',
-            description: 'Agendamos no melhor dia pra você. Montamos tudo.',
+            description: 'Entregamos e montamos tudo.',
             icon: <Truck className="w-8 h-8" />,
             color: 'from-[var(--color-brand-green)] to-[#047857]',
             details: ['Montagem profissional', 'Mesa nivelada', 'Kit completo']

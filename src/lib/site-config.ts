@@ -82,7 +82,7 @@ export const TESTIMONIALS = [
         id: '3',
         name: 'Ricardo Almeida',
         role: 'Vila Mariana',
-        content: 'Procurei bastante antes de decidir. Li que as mesas eram usadas e fiquei preocupado com nivelamento. Quando chegou, testei com bolinha parada, ficou certinho. O feltro tava novo. Eu jogava em clubes com mesas profissionais, então os tacos que vem junto são bem básicos, comprei uns melhores. A manutenção inclusa é ótima.',
+        content: 'Procurei bastante antes de decidir. Li que as mesas eram usadas e fiquei preocupado com nivelamento. Quando chegou, testei e o nivelamento estava ótimo. O pano tava novo. A manutenção inclusa é ótima.',
         rating: 5,
         location: 'São Paulo - SP',
         type: 'pf' as const,
@@ -138,9 +138,9 @@ export const BENEFITS = [
     },
     {
         icon: '🚚',
-        title: 'Montagem profissional',
+        title: 'Frete e instalação',
         description: 'Nossa equipe instala, nivela e deixa pronta. Você não precisa fazer nada.',
-        highlight: 'Instalação inclusa',
+        highlight: 'Cobrado à parte',
         color: 'text-indigo-600',
         bgColor: 'bg-indigo-50'
     },

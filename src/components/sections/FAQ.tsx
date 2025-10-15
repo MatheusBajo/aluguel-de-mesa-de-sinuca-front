@@ -17,7 +17,7 @@ export function FAQ() {
             },
             {
                 question: 'E se a mesa der problema?',
-                answer: 'Consertamos ou trocamos. A manutenção está inclusa no aluguel. Qualquer problema que surgir, é nossa responsabilidade resolver.'
+                answer: 'Consertamos ou trocamos. A manutenção está inclusa no aluguel. Qualquer problema que surgir, é nossa responsabilidade resolver. Em caso de mau uso, será cobrado o serviço de reforma.'
             },
             {
                 question: 'Posso trocar de mesa durante o contrato?',
@@ -31,7 +31,7 @@ export function FAQ() {
         delivery: [
             {
                 question: 'Demora quanto pra entregar?',
-                answer: 'Depende da região e estoque. Sempre agendamos dia e horário que funcionem para você após a confirmação do contrato.'
+                answer: 'Depende da região e estoque. Sempre confirmamos dia e horário que funcionem para você após a confirmação do contrato.'
             },
             {
                 question: 'Quem monta a mesa?',
@@ -61,7 +61,7 @@ export function FAQ() {
             },
             {
                 question: 'Quanto custa a entrega?',
-                answer: 'Taxa única de entrega + montagem que varia por região (geralmente R$ 150-250). É pago uma vez só. Quando você cancelar, a retirada já tá inclusa nessa taxa.'
+                answer: 'Taxa de frete e montagem/nivelamento que varia por região (geralmente R$ 150-250). É pago uma vez só. Quando você cancelar, a retirada já tá inclusa nessa taxa.'
             }
         ]
     };

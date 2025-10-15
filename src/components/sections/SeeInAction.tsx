@@ -7,10 +7,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 const contextImages = [
-    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background.jpeg', alt: 'Mesa em uso - ambiente 1' },
-    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-01.jpeg', alt: 'Mesa em uso - ambiente 2' },
-    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-04.jpeg', alt: 'Mesa em uso - ambiente 3' },
-    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-05.jpeg', alt: 'Mesa em uso - ambiente 4' }
+    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background.jpg', alt: 'Mesa em uso - ambiente 1' },
+    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-01.jpg', alt: 'Mesa em uso - ambiente 2' },
+    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-04.jpg', alt: 'Mesa em uso - ambiente 3' },
+    { src: '/images/produtos/mesa-de-sinuca-padrao/fotos-background/16x9-mesa-de-sinuca-background-05.jpg', alt: 'Mesa em uso - ambiente 4' }
 ];
 
 export function SeeInAction() {
@@ -131,7 +131,7 @@ export function SeeInAction() {
             longPressTimerRef.current = setTimeout(() => {
                 isPausedRef.current = true;
                 wasLongPressRef.current = true;
-            }, 500); // 500ms = long press
+            }, 500);
         }
     };
 
@@ -145,18 +145,14 @@ export function SeeInAction() {
         const x = pageX - scrollContainer.offsetLeft;
         const distance = Math.abs(x - startXRef.current);
 
-        // Se mexeu mais de 5px, considera como drag
         if (distance > 5) {
             hasMovedRef.current = true;
-
-            // Prevenir scroll do body
             e.preventDefault();
 
             const walk = (x - startXRef.current) * 1;
             scrollContainer.scrollLeft = scrollLeftRef.current - walk;
             scrollPositionRef.current = scrollContainer.scrollLeft;
 
-            // Cancelar long press se arrastar
             if (longPressTimerRef.current) {
                 clearTimeout(longPressTimerRef.current);
                 wasLongPressRef.current = false;
@@ -171,7 +167,6 @@ export function SeeInAction() {
             clearTimeout(longPressTimerRef.current);
         }
 
-        // Reset após um delay pra não conflitar com click
         setTimeout(() => {
             hasMovedRef.current = false;
             wasLongPressRef.current = false;
@@ -179,14 +174,12 @@ export function SeeInAction() {
     };
 
     const handleImageClick = (index: number, e: React.MouseEvent) => {
-        // Só abre se não foi drag nem long press
         if (!hasMovedRef.current && !wasLongPressRef.current) {
             e.stopPropagation();
             openLightbox(index);
         }
     };
 
-    // Click fora retoma (mobile)
     const handleClickOutside = (e: React.MouseEvent) => {
         if (e.target === e.currentTarget) {
             isPausedRef.current = false;
@@ -196,7 +189,6 @@ export function SeeInAction() {
     return (
         <section className="py-20 bg-muted/30 overflow-hidden">
             <div className="container mx-auto px-4 mb-12">
-                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -220,7 +212,7 @@ export function SeeInAction() {
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
                     WebkitOverflowScrolling: 'touch',
-                    touchAction: 'pan-y' // Só permite scroll vertical, previne horizontal do body
+                    touchAction: 'pan-y'
                 }}
                 onMouseDown={handleDragStart}
                 onMouseMove={handleDragMove}
@@ -231,7 +223,6 @@ export function SeeInAction() {
                 onTouchEnd={handleDragEnd}
                 onClick={handleClickOutside}
             >
-                {/* Duplicamos as imagens pra criar efeito infinito sem gaps */}
                 {[...contextImages, ...contextImages].map((img, idx) => (
                     <motion.button
                         key={idx}
@@ -249,7 +240,6 @@ export function SeeInAction() {
                             draggable={false}
                         />
 
-                        {/* Overlay com hint */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <span className="text-white text-sm font-medium bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm">
                                 Clique para ampliar
@@ -259,7 +249,6 @@ export function SeeInAction() {
                 ))}
             </div>
 
-            {/* Dica */}
             <div className="text-center mt-8">
                 <p className="text-sm text-muted-foreground">
                     💡 Arraste pra controlar • Pressione e segure pra pausar (mobile)
@@ -276,7 +265,6 @@ export function SeeInAction() {
                         className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
                         onClick={closeLightbox}
                     >
-                        {/* Botão fechar */}
                         <button
                             onClick={closeLightbox}
                             className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-colors z-10"
@@ -285,7 +273,6 @@ export function SeeInAction() {
                             <X className="w-6 h-6 text-white" />
                         </button>
 
-                        {/* Imagem */}
                         <motion.div
                             initial={{ scale: 0.9 }}
                             animate={{ scale: 1 }}
@@ -302,7 +289,6 @@ export function SeeInAction() {
                             />
                         </motion.div>
 
-                        {/* Label */}
                         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-sm backdrop-blur-sm bg-black/50 px-4 py-2 rounded-full">
                             {contextImages[lightboxImage].alt}
                         </div>
@@ -311,14 +297,12 @@ export function SeeInAction() {
             </AnimatePresence>
 
             <style jsx>{`
-                /* Remove scrollbar em todos browsers */
                 div::-webkit-scrollbar {
                     display: none;
                 }
             `}</style>
 
             <style jsx global>{`
-                /* Previne scroll horizontal no body (iOS fix) */
                 html, body {
                     overflow-x: hidden;
                     overscroll-behavior-x: none;

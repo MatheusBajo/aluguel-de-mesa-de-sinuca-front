@@ -1,0 +1,65 @@
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 7.0-c000 1.000000, 0000/00/00-00:00:00        ">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+    xmlns:crs="http://ns.adobe.com/camera-raw-settings/1.0/"
+    xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/"
+    xmlns:stDim="http://ns.adobe.com/xap/1.0/sType/Dimensions#"
+    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
+    xmlns:vfs="http://ns.adobe.com/video-foundation-settings/1.0/"
+    xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/"
+    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+    xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
+   xmp:CreateDate="2025-10-13T22:37:33.182"
+   xmp:MetadataDate="2025-10-14T21:36:28-03:00"
+   crs:AlreadyApplied="False"
+   crs:RawFileName="dreamina-2025-10-13-6094-Câmera 100% estática. Dê movimento nas p....mp4"
+   xmpDM:duration="5.042"
+   xmpDM:videoFrameRate="24"
+   tiff:ImageWidth="1920"
+   tiff:ImageLength="1088"
+   tiff:Orientation="1"
+   vfs:version="2"
+   vfs:processVersion="1"
+   vfs:saturation="-1000"
+   vfs:vibrance="9000"
+   vfs:blacks2012="-8000"
+   vfs:contrast2012="3000"
+   vfs:adjustmentsFraction="1000"
+   photoshop:SidecarForExtension="MP4"
+   photoshop:EmbeddedXMPDigest="00000000000000000000000000000000"
+   xmpMM:InstanceID="xmp.iid:46eecf61-458e-3040-a73a-034e2129be22"
+   xmpMM:DocumentID="xmp.did:46eecf61-458e-3040-a73a-034e2129be22"
+   xmpMM:OriginalDocumentID="xmp.did:46eecf61-458e-3040-a73a-034e2129be22">
+   <xmpDM:videoFrameSize
+    stDim:w="1920"
+    stDim:h="1088"/>
+   <vfs:toneCurveMain
+    vfs:y4="423"
+    vfs:y5="588"
+    vfs:x5="607"
+    vfs:x4="533"
+    vfs:x2="149"
+    vfs:x3="345"
+    vfs:y2="133"
+    vfs:y3="305"
+    vfs:y7="741"
+    vfs:count="9000"
+    vfs:x7="827"
+    vfs:x8="937"
+    vfs:y8="925"
+    vfs:x6="729"
+    vfs:y6="650"/>
+   <xmpMM:History>
+    <rdf:Seq>
+     <rdf:li
+      stEvt:action="saved"
+      stEvt:instanceID="xmp.iid:46eecf61-458e-3040-a73a-034e2129be22"
+      stEvt:when="2025-10-14T21:36:28-03:00"
+      stEvt:softwareAgent="Adobe Lightroom 8.5.1 (Windows)"
+      stEvt:changed="/metadata"/>
+    </rdf:Seq>
+   </xmpMM:History>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
