@@ -1,9 +1,12 @@
+const withExportImages = require('next-export-optimize-images');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
 
     images: {
-        unoptimized: true,
+        loader: 'custom',
+        loaderFile: './image-loader.js',
     },
 
     compress: true,
@@ -18,7 +21,7 @@ const nextConfig = {
     },
 }
 
-module.exports = nextConfig;
+module.exports = withExportImages(nextConfig);
 
 // // next.config.js
 // // CORREÇÃO: Remover swcMinify (não existe mais no Next.js 15)
