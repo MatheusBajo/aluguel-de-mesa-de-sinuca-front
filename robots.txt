@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://aluguel-de-mesa-de-sinuca-front.vercel.app/sitemap.xml
