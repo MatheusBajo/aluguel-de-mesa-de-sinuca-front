@@ -38,7 +38,7 @@ export function CTA() {
                     {/* Benefits compactos */}
                     <div className="flex flex-wrap justify-center gap-4 mb-8">
                         {[
-                            { icon: <Users className="w-5 h-5" />, text: 'R$ 62 dividindo por 4' },
+                            { icon: <Users className="w-5 h-5" />, text: 'R$ 74 dividindo por 4' },
                             { icon: <Shield className="w-5 h-5" />, text: 'Contrato 6 meses' },
                             { icon: <ArrowRight className="w-5 h-5" />, text: 'Manutenção inclusa' }
                         ].map((item, index) => (

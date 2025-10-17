@@ -49,7 +49,7 @@ export function FAQ() {
         pricing: [
             {
                 question: 'Como funciona a divisão entre amigos?',
-                answer: 'Você junta a galera e divide do jeito que quiserem. R$ 250 ÷ 4 = R$ 62,50 cada. A gente não se mete em como vocês organizam isso. Só queremos saber quem é o responsável pelo contrato.'
+                answer: 'Você junta a galera e divide do jeito que quiserem. R$ 295 ÷ 4 = R$ 73,75 cada. A gente não se mete em como vocês organizam isso. Só queremos saber quem é o responsável pelo contrato.'
             },
             {
                 question: 'E se meus amigos desistirem no meio?',

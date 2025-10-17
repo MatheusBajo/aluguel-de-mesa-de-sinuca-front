@@ -7,9 +7,9 @@
 // 💰 PREÇOS
 export const PRICING = {
     pf: {
-        monthly: 250,
+        monthly: 295,
         contract: 6,
-        total: 1500,
+        total: 1770,
         label: 'Residencial'
     },
     pj: {
@@ -38,7 +38,7 @@ export const PRODUCTS = [
             'Kit com 7 tacos e 1 jogo de bola numerada, 1 jogo de bola lisa, 1 bolão branco, giz azul e giz branco'
         ],
         spaces: ['Garagem', 'Área de lazer', 'Salão'],
-        monthlyPrice: 250,
+        monthlyPrice: 295,
         type: 'pf' as const
     }
 ] as const;

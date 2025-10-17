@@ -152,7 +152,7 @@ export function Products() {
 
                                 {/* Badge de Preço - Menor */}
                                 <Badge className="absolute top-4 right-4 bg-gradient-to-br from-purple-500 to-pink-500 text-white z-10 border-0 backdrop-blur-md text-sm font-bold px-3 py-1.5">
-                                    R$ 250/mês
+                                    R$ 295/mês
                                 </Badge>
 
                                 {/* Hint de zoom */}

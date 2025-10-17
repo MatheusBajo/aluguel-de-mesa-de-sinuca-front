@@ -216,7 +216,6 @@ export function Hero() {
                         src="/images/produtos/mesa-de-sinuca-padrao/video-mesa-de-sinuca.mp4"
                         type="video/mp4"
                     />
-                    {/* Fallback para caso o vídeo não carregue */}
                     Seu navegador não suporta vídeos.
                 </video>
             </div>
@@ -227,7 +226,7 @@ export function Hero() {
                     {/* Badge com glassmorphism */}
                     <div ref={badgeRef} className="mb-6">
                         <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 text-foreground px-4 py-2 text-base font-semibold border border-white/30 dark:border-white/20">
-                            🎱 A partir de R$ 250/mês
+                            🎱 A partir de R$ 295/mês
                         </Badge>
                     </div>
 
@@ -271,7 +270,7 @@ export function Hero() {
                             ✓ Contratos de até 6 meses
                         </Badge>
                         <Badge className="backdrop-blur-[2px] bg-white/40 dark:bg-black/40 border border-white/30 dark:border-white/20 text-foreground px-4 py-2">
-                            ✓ R$ 250/mês
+                            ✓ R$ 295/mês
                         </Badge>
                     </div>
                 </div>
