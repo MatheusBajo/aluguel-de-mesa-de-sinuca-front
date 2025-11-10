@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { Users, Home, TestTube, Wrench, Calendar, Heart } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { BENEFITS } from '@/lib/site-config';
+import { useWhatsApp } from '@/hooks/useWhatsApp';
 
 export function Benefits() {
+    const { openWhatsApp } = useWhatsApp();
     const iconMap: Record<string, React.ReactNode> = {
         '🎱': <TestTube className="w-8 h-8" />,
         '👥': <Users className="w-8 h-8" />,
@@ -91,14 +93,12 @@ export function Benefits() {
                         Sem o risco de um investimento alto que pode virar arrependimento.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a
-                            href="https://wa.me/5511999999999?text=Olá! Quero saber mais sobre o aluguel de mesa de sinuca."
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <button
+                            onClick={() => openWhatsApp({ message: 'Olá! Quero saber mais sobre o aluguel de mesa de sinuca.' })}
                             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[var(--color-brand-green)] text-white font-bold text-lg hover:bg-[#047857] transition-all"
                         >
                             💬 Conversar no WhatsApp
-                        </a>
+                        </button>
                     </div>
                 </motion.div>
             </div>
