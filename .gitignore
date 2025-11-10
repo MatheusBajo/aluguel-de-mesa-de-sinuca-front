@@ -27,6 +27,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# PERMITIR .env.production (contém apenas variáveis públicas NEXT_PUBLIC_*)
+!.env.production
+
 # vercel
 .vercel
 
